@@ -36,9 +36,9 @@ def webhook():
                 if messaging_event.get("message"):  # someone sent us a message
                     received_message(messaging_event)
                 if messaging_event.get("delivery"):  # delivery confirmation
-                    received_confirmation(messaging_event)
+                    received_delivery(messaging_event)
                 if messaging_event.get("optin"):  # optin confirmation
-                    received_confirmatino(messaging_event):
+                    received_confirmation(messaging_event):
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
                     received_postback(messaging_event)
 
