@@ -96,7 +96,7 @@ def send_message(recipient_id, message_text, quick_replies = []):
 
     for reply in quick_replies:
         item = {}
-        item["content-type"] = "text"
+        item["content_type"] = "text"
         item["title"] = reply
         item["payload"] = reply
         data["message"]["quick_replies"].append(item)
