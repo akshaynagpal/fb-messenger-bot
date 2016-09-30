@@ -93,6 +93,7 @@ def send_message(recipient_id, message_text, postbacks = []):
     data["buttons"] = []
 
     for postback in postbacks:
+        print "Postback: ", postback
         item = {}
         item["type"] = "postback"
         item["title"] = postback
