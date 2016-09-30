@@ -46,11 +46,13 @@ def webhook():
 
 
 def received_message(messaging_event):
-      sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
-      recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
-      message_text = messaging_event["message"]["text"]  # the message's text
-
-      send_message(sender_id, "got it, thanks!", ["bookmark", "call"])
+    
+    sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+    recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+    if "text" in messaging_event["message"]:
+        message_text = messaging_event["message"]["text"]
+          
+    send_message(sender_id, "got it, thanks!", ["bookmark", "call"])
 
 def received_delivery(messaging_event):
       sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
@@ -71,7 +73,7 @@ def received_postback(messaging_event):
       send_message(sender_id, "got the postback, thanks!")
 
       
-def send_message(recipient_id, message_text, postbacks = []):
+def send_message(recipient_id, message_text, quick_replies = []):
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
 
@@ -90,17 +92,17 @@ def send_message(recipient_id, message_text, postbacks = []):
         }
     }
 
-    data["buttons"] = []
+    data["message"]["quick_replies"] = []
 
-    for postback in postbacks:
-        print "Postback: ", postback
+    for reply in quick_replies:
         item = {}
-        item["type"] = "postback"
-        item["title"] = postback
-        item["payload"] = postback
-        data["buttons"].append(item)
+        item["content-type"] = "text"
+        item["title"] = reply
+        item["payload"] = reply
+        data["message"]["quick_replies"].append(item)
 
     data = json.dumps(data)
+    log(data)
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     if r.status_code != 200:
         log(r.status_code)
