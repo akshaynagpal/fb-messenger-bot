@@ -56,13 +56,13 @@ def received_delivery(messaging_event):
       sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
       recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
 
-      send_message(sender_id, ", thanks!")
+#      send_message(sender_id, ", thanks!")
       
 def received_confirmation(messaging_event):
       sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
       recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
 
-      send_message(sender_id, "got the confirmation, thanks!")
+#      send_message(sender_id, "got the confirmation, thanks!")
 
 def received_postback(messaging_event):
       sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
