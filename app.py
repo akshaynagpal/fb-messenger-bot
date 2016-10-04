@@ -56,7 +56,7 @@ def received_message(messaging_event):
     reply = "Sorry, cannot help you at this time!"
     if "text" in messaging_event["message"]:
         message_text = messaging_event["message"]["text"]
-        reply = watson.message(message_text)
+        reply = watson.message(sender_id, message_text)
 
     send_message(sender_id, reply)
 
