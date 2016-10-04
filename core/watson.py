@@ -1,6 +1,6 @@
 from watson_developer_cloud import ConversationV1
 
-class WatsonConversation:
+class ConversationAPI:
     def __init__(self,
                  workspace_id):
         self.workspace_id = workspace_id
@@ -32,7 +32,7 @@ class WatsonConversation:
 
 
 if __name__ == '__main__':
-    watson = WatsonConversation('b574127f-00aa-433e-b84b-ef92f4ec7aaa')
+    watson = ConversationAPI('b574127f-00aa-433e-b84b-ef92f4ec7aaa')
     print watson.message(1, "hello")
     print watson.message(1, "turn on the lights")    
 

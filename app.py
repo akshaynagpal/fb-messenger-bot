@@ -4,7 +4,7 @@ import json
 from core import watson
 
 workspace_id = 'b574127f-00aa-433e-b84b-ef92f4ec7aaa'
-watson = WatsonConversation(workspace_id)
+watson = watson.ConversationAPI(workspace_id)
 
 import requests
 from flask import Flask, request
