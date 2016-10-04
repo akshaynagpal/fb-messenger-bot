@@ -23,7 +23,7 @@ class ConversationAPI:
                 message):
         response = self.conversation.message(
             workspace_id=self.workspace_id,
-            message_input={'text': 'Turn on the lights'},
+            message_input={'text': message},
             context=self.lookup(user_id)
         )
         self.context_map[user_id] = response['context']
@@ -34,6 +34,6 @@ class ConversationAPI:
 # if __name__ == '__main__':
 #     watson = ConversationAPI('b574127f-00aa-433e-b84b-ef92f4ec7aaa')
 #     print watson.message(1, "hello")
-#     print watson.message(1, "turn on the lights")    
+#     print watson.message(1, "turn on the music")    
 
         
