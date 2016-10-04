@@ -29,11 +29,4 @@ class ConversationAPI:
         self.context_map[user_id] = response['context']
         return response
 
-
-
-if __name__ == '__main__':
-    watson = ConversationAPI('b574127f-00aa-433e-b84b-ef92f4ec7aaa')
-    print watson.message(1, "hello")
-    print watson.message(1, "turn on the lights")    
-
         
