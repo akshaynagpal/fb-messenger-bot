@@ -1,6 +1,10 @@
 import os
 import sys
 import json
+from core import watson
+
+workspace_id = 'b574127f-00aa-433e-b84b-ef92f4ec7aaa'
+watson = WatsonConversation(workspace_id)
 
 import requests
 from flask import Flask, request
@@ -49,10 +53,12 @@ def received_message(messaging_event):
     
     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+    reply = "Sorry, cannot help you at this time!"
     if "text" in messaging_event["message"]:
         message_text = messaging_event["message"]["text"]
-          
-    send_message(sender_id, "got it, thanks!", ["bookmark", "call"])
+        reply = watson.message(message_text)
+
+    send_message(sender_id, reply)
 
 def received_delivery(messaging_event):
       sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
@@ -115,4 +121,5 @@ def log(message):  # simple wrapper for logging to stdout on heroku
 
 
 if __name__ == '__main__':
+
     app.run(debug=True)
