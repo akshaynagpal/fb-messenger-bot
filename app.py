@@ -98,14 +98,17 @@ def send_message(recipient_id, message_text, quick_replies = []):
         }
     }
 
-    data["message"]["quick_replies"] = []
 
+    replies = []
     for reply in quick_replies:
         item = {}
         item["content_type"] = "text"
         item["title"] = reply
         item["payload"] = reply + " payload"
-        data["message"]["quick_replies"].append(item)
+        replies.append(item)
+
+    if len(replies):
+        data["message"]["quick_replies"] = replies
 
     data = json.dumps(data)
     log(data)
