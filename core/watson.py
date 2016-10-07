@@ -5,8 +5,8 @@ class ConversationAPI:
                  workspace_id):
         self.workspace_id = workspace_id
         self.conversation =  ConversationV1(
-            username='482fc754-cc90-4f98-9e15-11f3975338f3',
-            password='p5oKDIsRJHUq',
+            username='351251b5-22a9-4f30-9d04-884aff0aae4a',
+            password='zwgLdqOlcfYi',
             version='2016-09-20'
         )
 
@@ -31,9 +31,11 @@ class ConversationAPI:
 
 
 
+    
 # if __name__ == '__main__':
-#     watson = ConversationAPI('b574127f-00aa-433e-b84b-ef92f4ec7aaa')
+#     workspace_id = '08bf5014-cfaf-4b62-b6f6-6064517883f7'
+#     watson = ConversationAPI(workspace_id)
 #     print watson.message(1, "hello")
-#     print watson.message(1, "turn on the music")    
+#     print watson.message(1, "What is the deadline for computer science MS?")    
 
         

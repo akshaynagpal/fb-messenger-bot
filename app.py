@@ -3,7 +3,7 @@ import sys
 import json
 from core import watson
 
-workspace_id = 'b574127f-00aa-433e-b84b-ef92f4ec7aaa'
+workspace_id = '08bf5014-cfaf-4b62-b6f6-6064517883f7'
 watson = watson.ConversationAPI(workspace_id)
 
 import requests
