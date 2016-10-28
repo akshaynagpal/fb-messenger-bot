@@ -8,3 +8,4 @@ itsdangerous==0.24
 requests==2.10.0
 wsgiref==0.1.2
 watson-developer-cloud==0.20.0
+nltk==3.0.2

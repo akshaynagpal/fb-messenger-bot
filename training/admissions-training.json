@@ -1,1 +1,986 @@
-{"name":"admissions","created":"2016-10-07T14:26:16.433Z","intents":[{"intent":"application-method","created":"2016-10-07T15:18:14.929Z","examples":[{"text":"can i apply by mail?","created":"2016-10-07T15:18:14.929Z"},{"text":"do I apply online","created":"2016-10-07T15:18:14.929Z"},{"text":"do we apply online?","created":"2016-10-07T15:18:14.929Z"},{"text":"how do I apply?","created":"2016-10-07T15:18:14.929Z"},{"text":"How do I apply to Columbia University Fu Foundation School of Engineering and Applied Science (SEAS)?","created":"2016-10-07T15:18:14.929Z"},{"text":"How do I apply to engineering?","created":"2016-10-07T15:18:14.929Z"},{"text":"How do I apply to the graduate program for computer science?","created":"2016-10-07T15:18:14.929Z"},{"text":"what is the best way to apply","created":"2016-10-07T16:52:47.050Z"},{"text":"what is the way to apply","created":"2016-10-07T16:52:51.109Z"},{"text":"where do I apply online","created":"2016-10-07T15:18:14.929Z"}],"description":null},{"intent":"chances","created":"2016-10-07T14:59:46.831Z","examples":[{"text":"how many students each college do you accept?","created":"2016-10-07T14:59:46.831Z"},{"text":"If my GRE score is below 160 can I still get in?","created":"2016-10-07T14:59:46.831Z"},{"text":"is there any cutoff for GPA?","created":"2016-10-07T14:59:46.831Z"},{"text":"Is there any requirement for test scores?","created":"2016-10-07T14:59:46.831Z"},{"text":"What are my chances of getting in with a certain GPA?","created":"2016-10-07T14:59:46.831Z"},{"text":"what are the chances of getting in for an international student?","created":"2016-10-07T14:59:46.831Z"},{"text":"will I get in?","created":"2016-10-07T14:59:46.831Z"}],"description":null},{"intent":"cs-goodbye","created":"2016-10-07T16:22:59.700Z","examples":[{"text":"adieu","created":"2016-10-07T16:22:59.788Z"},{"text":"adios","created":"2016-10-07T16:22:59.788Z"},{"text":"au revoir","created":"2016-10-07T16:22:59.788Z"},{"text":"bye","created":"2016-10-07T16:22:59.788Z"},{"text":"bye now","created":"2016-10-07T16:22:59.788Z"},{"text":"cya","created":"2016-10-07T16:22:59.788Z"},{"text":"farewell","created":"2016-10-07T16:22:59.788Z"},{"text":"goodbye","created":"2016-10-07T16:22:59.788Z"},{"text":"good bye","created":"2016-10-07T16:22:59.788Z"},{"text":"good day","created":"2016-10-07T16:22:59.788Z"},{"text":"good night","created":"2016-10-07T16:22:59.788Z"},{"text":"gotta go","created":"2016-10-07T16:22:59.788Z"},{"text":"gotta run","created":"2016-10-07T16:22:59.788Z"},{"text":"got to go","created":"2016-10-07T16:22:59.788Z"},{"text":"have to go","created":"2016-10-07T16:22:59.788Z"},{"text":"have to leave","created":"2016-10-07T16:22:59.788Z"},{"text":"laters","created":"2016-10-07T16:22:59.788Z"},{"text":"my time is up","created":"2016-10-07T16:22:59.788Z"},{"text":"need to go","created":"2016-10-07T16:22:59.788Z"},{"text":"need to leave","created":"2016-10-07T16:22:59.788Z"},{"text":"need to run","created":"2016-10-07T16:22:59.788Z"},{"text":"signing off","created":"2016-10-07T16:22:59.788Z"},{"text":"thanks, bye","created":"2016-10-07T16:22:59.788Z"},{"text":"thank you, bye","created":"2016-10-07T16:22:59.788Z"}],"description":null},{"intent":"cs-hello","created":"2016-10-07T16:22:59.700Z","examples":[{"text":"afternoon","created":"2016-10-07T16:22:59.788Z"},{"text":"aloha","created":"2016-10-07T16:22:59.788Z"},{"text":"bonjour","created":"2016-10-07T16:22:59.788Z"},{"text":"buenos dias","created":"2016-10-07T16:22:59.788Z"},{"text":"ciao","created":"2016-10-07T16:22:59.788Z"},{"text":"g'day","created":"2016-10-07T16:22:59.788Z"},{"text":"good afternoon","created":"2016-10-07T16:22:59.788Z"},{"text":"good evening","created":"2016-10-07T16:22:59.788Z"},{"text":"good morning","created":"2016-10-07T16:22:59.788Z"},{"text":"greetings","created":"2016-10-07T16:22:59.788Z"},{"text":"Hello","created":"2016-10-07T16:22:59.788Z"},{"text":"Hello, how are you?","created":"2016-10-07T16:22:59.788Z"},{"text":"hey","created":"2016-10-07T16:22:59.788Z"},{"text":"heya","created":"2016-10-07T16:22:59.788Z"},{"text":"hey there","created":"2016-10-07T16:22:59.788Z"},{"text":"hi","created":"2016-10-07T16:22:59.788Z"},{"text":"hi how are u","created":"2016-10-07T16:22:59.788Z"},{"text":"hi there","created":"2016-10-07T16:22:59.788Z"},{"text":"hiya","created":"2016-10-07T16:22:59.788Z"},{"text":"Hola","created":"2016-10-07T16:22:59.788Z"},{"text":"How are you doing?","created":"2016-10-07T16:22:59.788Z"},{"text":"howdy","created":"2016-10-07T16:22:59.788Z"},{"text":"morning","created":"2016-10-07T16:22:59.788Z"},{"text":"yo","created":"2016-10-07T16:22:59.788Z"}],"description":null},{"intent":"cs-help","created":"2016-10-07T16:22:59.700Z","examples":[{"text":"help","created":"2016-10-07T16:22:59.788Z"},{"text":"help me","created":"2016-10-07T16:22:59.788Z"},{"text":"How are you going to help me?","created":"2016-10-07T16:22:59.788Z"},{"text":"how can you help me","created":"2016-10-07T16:22:59.788Z"},{"text":"need help","created":"2016-10-07T16:22:59.788Z"},{"text":"tell me what things you can do","created":"2016-10-07T16:22:59.788Z"},{"text":"tell me what you can do","created":"2016-10-07T16:22:59.788Z"},{"text":"What are you","created":"2016-10-07T16:22:59.788Z"},{"text":"what are you capable of","created":"2016-10-07T16:22:59.788Z"},{"text":"what are your capabilities Watson?","created":"2016-10-07T16:22:59.788Z"},{"text":"what can I do","created":"2016-10-07T16:22:59.788Z"},{"text":"What can i say","created":"2016-10-07T16:22:59.788Z"},{"text":"what can you do","created":"2016-10-07T16:22:59.788Z"},{"text":"what can you do for me","created":"2016-10-07T16:22:59.788Z"},{"text":"what can you help me with","created":"2016-10-07T16:22:59.788Z"},{"text":"what do you know","created":"2016-10-07T16:22:59.788Z"},{"text":"what things can you do","created":"2016-10-07T16:22:59.788Z"}],"description":null},{"intent":"cs-no","created":"2016-10-07T16:22:59.700Z","examples":[{"text":"definitely not","created":"2016-10-07T16:22:59.788Z"},{"text":"never","created":"2016-10-07T16:22:59.788Z"},{"text":"no","created":"2016-10-07T16:22:59.788Z"},{"text":"no no no","created":"2016-10-07T16:22:59.788Z"},{"text":"no not at all","created":"2016-10-07T16:22:59.788Z"},{"text":"no not really","created":"2016-10-07T16:22:59.788Z"},{"text":"no thanks","created":"2016-10-07T16:22:59.788Z"},{"text":"no thank you","created":"2016-10-07T16:22:59.788Z"},{"text":"not likely","created":"2016-10-07T16:22:59.788Z"},{"text":"no way","created":"2016-10-07T16:22:59.788Z"},{"text":"of course not","created":"2016-10-07T16:22:59.788Z"},{"text":"you must be kidding!","created":"2016-10-07T16:22:59.779Z"}],"description":null},{"intent":"cs-thankyou","created":"2016-10-07T16:22:59.700Z","examples":[{"text":"cheers","created":"2016-10-07T16:22:59.779Z"},{"text":"kthx","created":"2016-10-07T16:22:59.779Z"},{"text":"much obliged","created":"2016-10-07T16:22:59.779Z"},{"text":"ta","created":"2016-10-07T16:22:59.779Z"},{"text":"ta very much","created":"2016-10-07T16:22:59.779Z"},{"text":"thanks","created":"2016-10-07T16:22:59.779Z"},{"text":"thanks a lot","created":"2016-10-07T16:22:59.779Z"},{"text":"thankyou","created":"2016-10-07T16:22:59.779Z"},{"text":"thank you","created":"2016-10-07T16:22:59.779Z"},{"text":"that's great, thanks","created":"2016-10-07T16:22:59.779Z"},{"text":"thx","created":"2016-10-07T16:22:59.779Z"}],"description":null},{"intent":"cs-yes","created":"2016-10-07T16:22:59.700Z","examples":[{"text":"absolutely","created":"2016-10-07T16:22:59.779Z"},{"text":"agreed","created":"2016-10-07T16:22:59.779Z"},{"text":"correct","created":"2016-10-07T16:22:59.779Z"},{"text":"definitely","created":"2016-10-07T16:22:59.779Z"},{"text":"for sure","created":"2016-10-07T16:22:59.779Z"},{"text":"I agree","created":"2016-10-07T16:22:59.779Z"},{"text":"no problem","created":"2016-10-07T16:22:59.779Z"},{"text":"ok","created":"2016-10-07T16:22:59.779Z"},{"text":"okay","created":"2016-10-07T16:22:59.779Z"},{"text":"right","created":"2016-10-07T16:22:59.779Z"},{"text":"sure","created":"2016-10-07T16:22:59.779Z"},{"text":"sure thing","created":"2016-10-07T16:22:59.779Z"},{"text":"yeah","created":"2016-10-07T16:22:59.779Z"},{"text":"yes","created":"2016-10-07T16:22:59.779Z"}],"description":null},{"intent":"deadline","created":"2016-10-07T15:20:28.967Z","examples":[{"text":"admission deadline","created":"2016-10-07T15:20:28.967Z"},{"text":"computer science admission deadline","created":"2016-10-07T15:20:28.967Z"},{"text":"deadline for ms","created":"2016-10-07T15:37:05.781Z"},{"text":"phd admission deadline","created":"2016-10-07T15:20:28.967Z"},{"text":"what is the date for the application","created":"2016-10-07T15:20:28.967Z"},{"text":"what is the deadline for application?","created":"2016-10-07T15:20:28.967Z"},{"text":"what is the deadline for spring admission","created":"2016-10-07T15:20:28.967Z"},{"text":"whats the deadline","created":"2016-10-07T15:20:28.967Z"}],"description":null},{"intent":"payment","created":"2016-10-07T15:01:04.635Z","examples":[{"text":"application fee payment","created":"2016-10-07T15:01:04.635Z"},{"text":"can I pay with cash?","created":"2016-10-07T15:01:04.635Z"},{"text":"can we apply using a check","created":"2016-10-07T15:01:04.635Z"},{"text":"credit card payment","created":"2016-10-07T15:01:04.635Z"},{"text":"how can I pay","created":"2016-10-07T15:01:04.635Z"},{"text":"how to pay?","created":"2016-10-07T15:01:04.635Z"},{"text":"what is the application fee paid","created":"2016-10-07T15:01:04.635Z"}],"description":null}],"updated":"2016-10-07T19:07:28.192Z","entities":[{"entity":"degree","values":[{"value":"civil","created":"2016-10-07T15:26:06.541Z","metadata":null,"synonyms":["civil engineering"]},{"value":"computer_engineering","created":"2016-10-07T18:36:14.682Z","metadata":null,"synonyms":["comp engineering","computer engineering"]},{"value":"computer_science","created":"2016-10-07T15:24:10.804Z","metadata":null,"synonyms":["compsci","comp sci","computer","computer science","cs"]},{"value":"financial_engineering","created":"2016-10-07T15:24:53.971Z","metadata":null,"synonyms":["financial","financial engineering"]},{"value":"management_science","created":"2016-10-07T15:25:33.164Z","metadata":null,"synonyms":["maangement science","management","management engineering","management science","mgmt sci"]},{"value":"mechanical","created":"2016-10-07T18:34:40.896Z","metadata":null,"synonyms":["mech","mechanical engineering","meche"]},{"value":"phd","created":"2016-10-07T15:33:40.929Z","metadata":null,"synonyms":["compsci phd","cs phd","doctoral","engineering phd","phd","ph.d","phd in computer science","phd in engineering"]}],"created":"2016-10-07T15:21:20.624Z","open_list":false,"description":null}],"language":"en","metadata":null,"description":"logic for admissions chat","dialog_nodes":[{"go_to":null,"output":{"text":"All other MS Programs have a Feb 15 Deadline"},"parent":"node_1_1475854104908","context":null,"created":"2016-10-07T18:38:45.551Z","metadata":null,"conditions":"@degree","description":null,"dialog_node":"node_10_1475865525248","previous_sibling":"node_20_1475860603016"},{"go_to":null,"output":{"text":"Applicants must apply online"},"parent":null,"context":null,"created":"2016-10-07T16:30:36.855Z","metadata":null,"conditions":"#application-method","description":null,"dialog_node":"node_10_1475857836488","previous_sibling":"node_14_1475859214202"},{"go_to":null,"output":{"text":"Hi! Let me know how I can answer any admissions related questions :)"},"parent":null,"context":null,"created":"2016-10-07T17:55:46.994Z","metadata":null,"conditions":"#cs-hello","description":null,"dialog_node":"node_2_1475862946287","previous_sibling":"node_1_1475862917881"},{"go_to":null,"output":{"text":"Hi! The Columbia Admissions Office hopes we can answer all your questions."},"parent":null,"context":null,"created":"2016-10-07T15:40:13.912Z","metadata":null,"conditions":"conversation_start","description":null,"dialog_node":"node_6_1475854813598","previous_sibling":null},{"go_to":null,"output":{"text":"No problem! Let me know if I can do anything else for you."},"parent":null,"context":null,"created":"2016-10-07T17:55:18.463Z","metadata":null,"conditions":"#cs-thankyou","description":null,"dialog_node":"node_1_1475862917881","previous_sibling":"node_11_1475858758268"},{"go_to":null,"output":{"text":"See ya later!"},"parent":null,"context":null,"created":"2016-10-07T17:56:15.307Z","metadata":null,"conditions":"#cs-goodbye","description":null,"dialog_node":"node_3_1475862974834","previous_sibling":"node_2_1475862946287"},{"go_to":null,"output":{"text":"The application fee is paid online using a major credit card. No other forms of payment are accepted."},"parent":null,"context":null,"created":"2016-10-07T17:57:23.174Z","metadata":null,"conditions":"#payment","description":null,"dialog_node":"node_4_1475863042842","previous_sibling":"node_10_1475857836488"},{"go_to":null,"output":{"text":"The deadline is Dec 15th for all PhD deadlines"},"parent":"node_1_1475854104908","context":null,"created":"2016-10-07T15:54:59.501Z","metadata":null,"conditions":"@degree:phd","description":null,"dialog_node":"node_9_1475855699170","previous_sibling":"node_7_1475855162659"},{"go_to":null,"output":{"text":"The deadline is Jan 15. Let me know if there's anything else I can help with!"},"parent":"node_1_1475854104908","context":null,"created":"2016-10-07T15:46:03.213Z","metadata":null,"conditions":"@degree:civil","description":null,"dialog_node":"node_7_1475855162659","previous_sibling":"node_3_1475854160638"},{"go_to":null,"output":{"text":"The deadline is Jan 15.\nLet me know if there's anything else I can help with!"},"parent":"node_1_1475854104908","context":null,"created":"2016-10-07T15:29:20.948Z","metadata":null,"conditions":"@degree:computer_science","description":null,"dialog_node":"node_3_1475854160638","previous_sibling":null},{"go_to":null,"output":{"text":"The deadline is Jan 6."},"parent":"node_1_1475854104908","context":null,"created":"2016-10-07T17:16:43.575Z","metadata":null,"conditions":"@degree:financial_engineering","description":null,"dialog_node":"node_20_1475860603016","previous_sibling":"node_19_1475860467500"},{"go_to":null,"output":{"text":"The priority deadline is Jan 6, and the final deadline is Feb 15th."},"parent":"node_1_1475854104908","context":null,"created":"2016-10-07T17:14:28.567Z","metadata":null,"conditions":"@degree:management_science","description":null,"dialog_node":"node_19_1475860467500","previous_sibling":"node_9_1475855699170"},{"go_to":null,"output":{"text":"Unfortunately, we can not evaluate your candidacy prior to submission of a complete application.There is no specific cutoff for standardized test scores or GPA."},"parent":null,"context":null,"created":"2016-10-07T16:45:58.596Z","metadata":null,"conditions":"#chances","description":null,"dialog_node":"node_11_1475858758268","previous_sibling":"node_4_1475863042842"},{"go_to":null,"output":{"text":"We can't answer your questions at the moment."},"parent":null,"context":null,"created":"2016-10-07T15:28:44.729Z","metadata":null,"conditions":"anything_else","description":null,"dialog_node":"node_2_1475854124407","previous_sibling":"node_3_1475862974834"},{"go_to":null,"output":{"text":"Which degree do you want to know the deadline for?"},"parent":null,"context":null,"created":"2016-10-07T16:53:34.539Z","metadata":null,"conditions":"#deadline","description":null,"dialog_node":"node_14_1475859214202","previous_sibling":"node_1_1475854104908"},{"go_to":{"return":null,"selector":"body","dialog_node":"node_9_1475855699170"},"output":{"text":""},"parent":"node_3_1475854160638","context":null,"created":"2016-10-07T18:13:22.089Z","metadata":null,"conditions":"@degree:phd","description":null,"dialog_node":"node_7_1475864001783","previous_sibling":null},{"go_to":{"return":null,"selector":"condition","dialog_node":"node_3_1475854160638"},"output":{},"parent":null,"context":null,"created":"2016-10-07T15:28:25.401Z","metadata":null,"conditions":"#deadline && @degree","description":null,"dialog_node":"node_1_1475854104908","previous_sibling":"node_6_1475854813598"},{"go_to":{"return":null,"selector":"condition","dialog_node":"node_3_1475854160638"},"output":{},"parent":"node_14_1475859214202","context":null,"created":"2016-10-07T16:57:07.184Z","metadata":null,"conditions":"@degree","description":null,"dialog_node":"node_17_1475859426747","previous_sibling":null},{"go_to":{"return":null,"selector":"condition","dialog_node":"node_3_1475854160638"},"output":{"text":"Sorry I don't understand what you said. Which degree do you want to know the deadline for?"},"parent":"node_14_1475859214202","context":null,"created":"2016-10-07T18:41:58.641Z","metadata":null,"conditions":"$reprompt","description":null,"dialog_node":"node_11_1475865718227","previous_sibling":"node_17_1475859426747"}],"workspace_id":"08bf5014-cfaf-4b62-b6f6-6064517883f7"}
+{
+  "name": "admissions",
+  "created": "2016-10-07T14:26:16.433Z",
+  "intents": [
+    {
+      "intent": "application-method",
+      "created": "2016-10-07T15:18:14.929Z",
+      "examples": [
+        {
+          "text": "can i apply by mail?",
+          "created": "2016-10-07T15:18:14.929Z"
+        },
+        {
+          "text": "do I apply online",
+          "created": "2016-10-07T15:18:14.929Z"
+        },
+        {
+          "text": "do we apply online?",
+          "created": "2016-10-07T15:18:14.929Z"
+        },
+        {
+          "text": "how do I apply?",
+          "created": "2016-10-07T15:18:14.929Z"
+        },
+        {
+          "text": "How do I apply to Columbia University Fu Foundation School of Engineering and Applied Science (SEAS)?",
+          "created": "2016-10-07T15:18:14.929Z"
+        },
+        {
+          "text": "How do I apply to engineering?",
+          "created": "2016-10-07T15:18:14.929Z"
+        },
+        {
+          "text": "How do I apply to the graduate program for computer science?",
+          "created": "2016-10-07T15:18:14.929Z"
+        },
+        {
+          "text": "what is the best way to apply",
+          "created": "2016-10-07T16:52:47.050Z"
+        },
+        {
+          "text": "what is the way to apply",
+          "created": "2016-10-07T16:52:51.109Z"
+        },
+        {
+          "text": "where do I apply online",
+          "created": "2016-10-07T15:18:14.929Z"
+        }
+      ],
+      "description": null
+    },
+    {
+      "intent": "chances",
+      "created": "2016-10-07T14:59:46.831Z",
+      "examples": [
+        {
+          "text": "how many students each college do you accept?",
+          "created": "2016-10-07T14:59:46.831Z"
+        },
+        {
+          "text": "If my GRE score is below 160 can I still get in?",
+          "created": "2016-10-07T14:59:46.831Z"
+        },
+        {
+          "text": "is there any cutoff for GPA?",
+          "created": "2016-10-07T14:59:46.831Z"
+        },
+        {
+          "text": "Is there any requirement for test scores?",
+          "created": "2016-10-07T14:59:46.831Z"
+        },
+        {
+          "text": "What are my chances of getting in with a certain GPA?",
+          "created": "2016-10-07T14:59:46.831Z"
+        },
+        {
+          "text": "what are the chances of getting in for an international student?",
+          "created": "2016-10-07T14:59:46.831Z"
+        },
+        {
+          "text": "will I get in?",
+          "created": "2016-10-07T14:59:46.831Z"
+        }
+      ],
+      "description": null
+    },
+    {
+      "intent": "cs-goodbye",
+      "created": "2016-10-07T16:22:59.700Z",
+      "examples": [
+        {
+          "text": "adieu",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "adios",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "au revoir",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "bye",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "bye now",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "cya",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "farewell",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "goodbye",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "good bye",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "good day",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "good night",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "gotta go",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "gotta run",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "got to go",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "have to go",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "have to leave",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "laters",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "my time is up",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "need to go",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "need to leave",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "need to run",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "signing off",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "thanks, bye",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "thank you, bye",
+          "created": "2016-10-07T16:22:59.788Z"
+        }
+      ],
+      "description": null
+    },
+    {
+      "intent": "cs-hello",
+      "created": "2016-10-07T16:22:59.700Z",
+      "examples": [
+        {
+          "text": "afternoon",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "aloha",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "bonjour",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "buenos dias",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "ciao",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "g'day",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "good afternoon",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "good evening",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "good morning",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "greetings",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "Hello",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "Hello, how are you?",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "hey",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "heya",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "hey there",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "hi",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "hi how are u",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "hi there",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "hiya",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "Hola",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "How are you doing?",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "howdy",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "morning",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "yo",
+          "created": "2016-10-07T16:22:59.788Z"
+        }
+      ],
+      "description": null
+    },
+    {
+      "intent": "cs-help",
+      "created": "2016-10-07T16:22:59.700Z",
+      "examples": [
+        {
+          "text": "help",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "help me",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "How are you going to help me?",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "how can you help me",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "need help",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "tell me what things you can do",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "tell me what you can do",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "What are you",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "what are you capable of",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "what are your capabilities Watson?",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "what can I do",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "What can i say",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "what can you do",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "what can you do for me",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "what can you help me with",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "what do you know",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "what things can you do",
+          "created": "2016-10-07T16:22:59.788Z"
+        }
+      ],
+      "description": null
+    },
+    {
+      "intent": "cs-no",
+      "created": "2016-10-07T16:22:59.700Z",
+      "examples": [
+        {
+          "text": "definitely not",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "never",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "no",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "no no no",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "no not at all",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "no not really",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "no thanks",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "no thank you",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "not likely",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "no way",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "of course not",
+          "created": "2016-10-07T16:22:59.788Z"
+        },
+        {
+          "text": "you must be kidding!",
+          "created": "2016-10-07T16:22:59.779Z"
+        }
+      ],
+      "description": null
+    },
+    {
+      "intent": "cs-thankyou",
+      "created": "2016-10-07T16:22:59.700Z",
+      "examples": [
+        {
+          "text": "cheers",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "kthx",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "much obliged",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "ta",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "ta very much",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "thanks",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "thanks a lot",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "thankyou",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "thank you",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "that's great, thanks",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "thx",
+          "created": "2016-10-07T16:22:59.779Z"
+        }
+      ],
+      "description": null
+    },
+    {
+      "intent": "cs-yes",
+      "created": "2016-10-07T16:22:59.700Z",
+      "examples": [
+        {
+          "text": "absolutely",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "agreed",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "correct",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "definitely",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "for sure",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "I agree",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "no problem",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "ok",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "okay",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "right",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "sure",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "sure thing",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "yeah",
+          "created": "2016-10-07T16:22:59.779Z"
+        },
+        {
+          "text": "yes",
+          "created": "2016-10-07T16:22:59.779Z"
+        }
+      ],
+      "description": null
+    },
+    {
+      "intent": "deadline",
+      "created": "2016-10-07T15:20:28.967Z",
+      "examples": [
+        {
+          "text": "admission deadline",
+          "created": "2016-10-07T15:20:28.967Z"
+        },
+        {
+          "text": "computer science admission deadline",
+          "created": "2016-10-07T15:20:28.967Z"
+        },
+        {
+          "text": "deadline for ms",
+          "created": "2016-10-07T15:37:05.781Z"
+        },
+        {
+          "text": "phd admission deadline",
+          "created": "2016-10-07T15:20:28.967Z"
+        },
+        {
+          "text": "what is the date for the application",
+          "created": "2016-10-07T15:20:28.967Z"
+        },
+        {
+          "text": "what is the deadline for application?",
+          "created": "2016-10-07T15:20:28.967Z"
+        },
+        {
+          "text": "what is the deadline for spring admission",
+          "created": "2016-10-07T15:20:28.967Z"
+        },
+        {
+          "text": "whats the deadline",
+          "created": "2016-10-07T15:20:28.967Z"
+        }
+      ],
+      "description": null
+    },
+    {
+      "intent": "payment",
+      "created": "2016-10-07T15:01:04.635Z",
+      "examples": [
+        {
+          "text": "application fee payment",
+          "created": "2016-10-07T15:01:04.635Z"
+        },
+        {
+          "text": "can I pay with cash?",
+          "created": "2016-10-07T15:01:04.635Z"
+        },
+        {
+          "text": "can we apply using a check",
+          "created": "2016-10-07T15:01:04.635Z"
+        },
+        {
+          "text": "credit card payment",
+          "created": "2016-10-07T15:01:04.635Z"
+        },
+        {
+          "text": "how can I pay",
+          "created": "2016-10-07T15:01:04.635Z"
+        },
+        {
+          "text": "how to pay?",
+          "created": "2016-10-07T15:01:04.635Z"
+        },
+        {
+          "text": "what is the application fee paid",
+          "created": "2016-10-07T15:01:04.635Z"
+        }
+      ],
+      "description": null
+    }
+  ],
+  "updated": "2016-10-07T19:07:28.192Z",
+  "entities": [
+    {
+      "entity": "degree",
+      "values": [
+        {
+          "value": "civil",
+          "created": "2016-10-07T15:26:06.541Z",
+          "metadata": null,
+          "synonyms": [
+            "civil engineering"
+          ]
+        },
+        {
+          "value": "computer_engineering",
+          "created": "2016-10-07T18:36:14.682Z",
+          "metadata": null,
+          "synonyms": [
+            "comp engineering",
+            "computer engineering"
+          ]
+        },
+        {
+          "value": "computer_science",
+          "created": "2016-10-07T15:24:10.804Z",
+          "metadata": null,
+          "synonyms": [
+            "compsci",
+            "comp sci",
+            "computer",
+            "computer science",
+            "cs"
+          ]
+        },
+        {
+          "value": "financial_engineering",
+          "created": "2016-10-07T15:24:53.971Z",
+          "metadata": null,
+          "synonyms": [
+            "financial",
+            "financial engineering"
+          ]
+        },
+        {
+          "value": "management_science",
+          "created": "2016-10-07T15:25:33.164Z",
+          "metadata": null,
+          "synonyms": [
+            "maangement science",
+            "management",
+            "management engineering",
+            "management science",
+            "mgmt sci"
+          ]
+        },
+        {
+          "value": "mechanical",
+          "created": "2016-10-07T18:34:40.896Z",
+          "metadata": null,
+          "synonyms": [
+            "mech",
+            "mechanical engineering",
+            "meche"
+          ]
+        },
+        {
+          "value": "phd",
+          "created": "2016-10-07T15:33:40.929Z",
+          "metadata": null,
+          "synonyms": [
+            "compsci phd",
+            "cs phd",
+            "doctoral",
+            "engineering phd",
+            "phd",
+            "ph.d",
+            "phd in computer science",
+            "phd in engineering"
+          ]
+        }
+      ],
+      "created": "2016-10-07T15:21:20.624Z",
+      "open_list": false,
+      "description": null
+    }
+  ],
+  "language": "en",
+  "metadata": null,
+  "description": "logic for admissions chat",
+  "dialog_nodes": [
+    {
+      "go_to": null,
+      "output": {
+        "text": "All other MS Programs have a Feb 15 Deadline"
+      },
+      "parent": "node_1_1475854104908",
+      "context": null,
+      "created": "2016-10-07T18:38:45.551Z",
+      "metadata": null,
+      "conditions": "@degree",
+      "description": null,
+      "dialog_node": "node_10_1475865525248",
+      "previous_sibling": "node_20_1475860603016"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "Applicants must apply online"
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T16:30:36.855Z",
+      "metadata": null,
+      "conditions": "#application-method",
+      "description": null,
+      "dialog_node": "node_10_1475857836488",
+      "previous_sibling": "node_14_1475859214202"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "Hi! Let me know how I can answer any admissions related questions :)"
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T17:55:46.994Z",
+      "metadata": null,
+      "conditions": "#cs-hello",
+      "description": null,
+      "dialog_node": "node_2_1475862946287",
+      "previous_sibling": "node_1_1475862917881"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "Hi! The Columbia Admissions Office hopes we can answer all your questions."
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T15:40:13.912Z",
+      "metadata": null,
+      "conditions": "conversation_start",
+      "description": null,
+      "dialog_node": "node_6_1475854813598",
+      "previous_sibling": null
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "No problem! Let me know if I can do anything else for you."
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T17:55:18.463Z",
+      "metadata": null,
+      "conditions": "#cs-thankyou",
+      "description": null,
+      "dialog_node": "node_1_1475862917881",
+      "previous_sibling": "node_11_1475858758268"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "See ya later!"
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T17:56:15.307Z",
+      "metadata": null,
+      "conditions": "#cs-goodbye",
+      "description": null,
+      "dialog_node": "node_3_1475862974834",
+      "previous_sibling": "node_2_1475862946287"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "The application fee is paid online using a major credit card. No other forms of payment are accepted."
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T17:57:23.174Z",
+      "metadata": null,
+      "conditions": "#payment",
+      "description": null,
+      "dialog_node": "node_4_1475863042842",
+      "previous_sibling": "node_10_1475857836488"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "The deadline is Dec 15th for all PhD deadlines"
+      },
+      "parent": "node_1_1475854104908",
+      "context": null,
+      "created": "2016-10-07T15:54:59.501Z",
+      "metadata": null,
+      "conditions": "@degree:phd",
+      "description": null,
+      "dialog_node": "node_9_1475855699170",
+      "previous_sibling": "node_7_1475855162659"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "The deadline is Jan 15. Let me know if there's anything else I can help with!"
+      },
+      "parent": "node_1_1475854104908",
+      "context": null,
+      "created": "2016-10-07T15:46:03.213Z",
+      "metadata": null,
+      "conditions": "@degree:civil",
+      "description": null,
+      "dialog_node": "node_7_1475855162659",
+      "previous_sibling": "node_3_1475854160638"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "The deadline is Jan 15.\nLet me know if there's anything else I can help with!"
+      },
+      "parent": "node_1_1475854104908",
+      "context": null,
+      "created": "2016-10-07T15:29:20.948Z",
+      "metadata": null,
+      "conditions": "@degree:computer_science",
+      "description": null,
+      "dialog_node": "node_3_1475854160638",
+      "previous_sibling": null
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "The deadline is Jan 6."
+      },
+      "parent": "node_1_1475854104908",
+      "context": null,
+      "created": "2016-10-07T17:16:43.575Z",
+      "metadata": null,
+      "conditions": "@degree:financial_engineering",
+      "description": null,
+      "dialog_node": "node_20_1475860603016",
+      "previous_sibling": "node_19_1475860467500"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "The priority deadline is Jan 6, and the final deadline is Feb 15th."
+      },
+      "parent": "node_1_1475854104908",
+      "context": null,
+      "created": "2016-10-07T17:14:28.567Z",
+      "metadata": null,
+      "conditions": "@degree:management_science",
+      "description": null,
+      "dialog_node": "node_19_1475860467500",
+      "previous_sibling": "node_9_1475855699170"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "Unfortunately, we can not evaluate your candidacy prior to submission of a complete application.There is no specific cutoff for standardized test scores or GPA."
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T16:45:58.596Z",
+      "metadata": null,
+      "conditions": "#chances",
+      "description": null,
+      "dialog_node": "node_11_1475858758268",
+      "previous_sibling": "node_4_1475863042842"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "We can't answer your questions at the moment."
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T15:28:44.729Z",
+      "metadata": null,
+      "conditions": "anything_else",
+      "description": null,
+      "dialog_node": "node_2_1475854124407",
+      "previous_sibling": "node_3_1475862974834"
+    },
+    {
+      "go_to": null,
+      "output": {
+        "text": "Which degree do you want to know the deadline for?"
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T16:53:34.539Z",
+      "metadata": null,
+      "conditions": "#deadline",
+      "description": null,
+      "dialog_node": "node_14_1475859214202",
+      "previous_sibling": "node_1_1475854104908"
+    },
+    {
+      "go_to": {
+        "return": null,
+        "selector": "body",
+        "dialog_node": "node_9_1475855699170"
+      },
+      "output": {
+        "text": ""
+      },
+      "parent": "node_3_1475854160638",
+      "context": null,
+      "created": "2016-10-07T18:13:22.089Z",
+      "metadata": null,
+      "conditions": "@degree:phd",
+      "description": null,
+      "dialog_node": "node_7_1475864001783",
+      "previous_sibling": null
+    },
+    {
+      "go_to": {
+        "return": null,
+        "selector": "condition",
+        "dialog_node": "node_3_1475854160638"
+      },
+      "output": {
+        
+      },
+      "parent": null,
+      "context": null,
+      "created": "2016-10-07T15:28:25.401Z",
+      "metadata": null,
+      "conditions": "#deadline && @degree",
+      "description": null,
+      "dialog_node": "node_1_1475854104908",
+      "previous_sibling": "node_6_1475854813598"
+    },
+    {
+      "go_to": {
+        "return": null,
+        "selector": "condition",
+        "dialog_node": "node_3_1475854160638"
+      },
+      "output": {
+        
+      },
+      "parent": "node_14_1475859214202",
+      "context": null,
+      "created": "2016-10-07T16:57:07.184Z",
+      "metadata": null,
+      "conditions": "@degree",
+      "description": null,
+      "dialog_node": "node_17_1475859426747",
+      "previous_sibling": null
+    },
+    {
+      "go_to": {
+        "return": null,
+        "selector": "condition",
+        "dialog_node": "node_3_1475854160638"
+      },
+      "output": {
+        "text": "Sorry I don't understand what you said. Which degree do you want to know the deadline for?"
+      },
+      "parent": "node_14_1475859214202",
+      "context": null,
+      "created": "2016-10-07T18:41:58.641Z",
+      "metadata": null,
+      "conditions": "$reprompt",
+      "description": null,
+      "dialog_node": "node_11_1475865718227",
+      "previous_sibling": "node_17_1475859426747"
+    }
+  ],
+  "workspace_id": "08bf5014-cfaf-4b62-b6f6-6064517883f7"
+}

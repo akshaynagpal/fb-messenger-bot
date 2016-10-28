@@ -1,4 +1,5 @@
 from watson_developer_cloud import ConversationV1
+import json
 
 class ConversationAPI:
     def __init__(self,
@@ -27,15 +28,17 @@ class ConversationAPI:
             context=self.lookup(user_id)
         )
         self.context_map[user_id] = response['context']
+
+        print json.dumps(response)
         return ''.join(response['output']['text'])
 
 
 
     
-# if __name__ == '__main__':
-#     workspace_id = '08bf5014-cfaf-4b62-b6f6-6064517883f7'
-#     watson = ConversationAPI(workspace_id)
-#     print watson.message(1, "hello")
-#     print watson.message(1, "What is the deadline for computer science MS?")    
+if __name__ == '__main__':
+    workspace_id = '08bf5014-cfaf-4b62-b6f6-6064517883f7'
+    watson = ConversationAPI(workspace_id)
+    print watson.message(1, "hi")
+    print watson.message(1, "deadline for phd compsci")    
 
         
