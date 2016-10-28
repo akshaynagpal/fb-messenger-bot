@@ -24,11 +24,11 @@ def verify():
 
     return "Hello world", 200
 
-@app.route('/feedback')
+@app.route('/feedback/')
 def displayQuestionForm():
     return render_template("feedbackForm.html")
 
-@app.route('/feedback',methods=['POST'])
+@app.route('/feedback/',methods=['POST'])
 def storeQuestion():
     question =  request.form['question']
     return question
@@ -135,4 +135,4 @@ def log(message):  # simple wrapper for logging to stdout on heroku
 
 if __name__ == '__main__':
 
-    app.run(debug=True)
+    app.run(debug=True) 
