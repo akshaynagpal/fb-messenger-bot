@@ -174,22 +174,24 @@ def print_basic_intents(data, fname):
                 else:
                     writer.writerow([sentence, "background"])
 
-def print_entities(scored_word_entities, threshold = 0.0):
-    for line in scored_word_entities:
-        normalized_word = line[0]
-        entity = line[1]
-        product = line[4]
-        if product <= threshold:
-            continue
-        for utterance in normalized_word_map[normalized_word]:
-            print "{},{}".format(entity.encode('utf-8').strip().replace(' ', '_'), utterance)
+def print_entities(scored_word_entities, outfile, threshold = 0.0):
+    with open(outfile, 'wb') as f:
+	for line in scored_word_entities:
+	    normalized_word = line[0]
+	    entity = line[1]
+	    product = line[4]
+	    if product <= threshold:
+	        continue
+	    for utterance in normalized_word_map[normalized_word]:
+	        f.write( "{},{}".format(entity.encode('utf-8').strip().replace(' ', '_'), utterance) + "\n")
             
 
 def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('traintsv')
-#    parser.add_argument('intentscsv')    
+    parser.add_argument('entitiescsv')
+    parser.add_argument('intentscsv')    
     args = parser.parse_args()
     
 
@@ -220,12 +222,12 @@ def main():
     #     print line
 
 
-    print_entities(pmi_scores)
+    print_entities(pmi_scores, args.entitiescsv)
     
 
     #get_non_questions(data)
     
-#    print_basic_intents(data, args.intentscsv)
+    print_basic_intents(data, args.intentscsv)
 
 if __name__ == "__main__":
     main()

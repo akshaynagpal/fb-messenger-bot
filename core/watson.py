@@ -36,9 +36,9 @@ class ConversationAPI:
 
     
 if __name__ == '__main__':
-    workspace_id = '08bf5014-cfaf-4b62-b6f6-6064517883f7'
+    workspace_id = '85ba0890-6fa8-4ca7-87af-b1b92cb6d10f'
     watson = ConversationAPI(workspace_id)
-    print watson.message(1, "hi")
-    print watson.message(1, "deadline for phd compsci")    
+    print watson.message(1, "is the seas welcome day mandatory?")
+    print watson.message(1, "When we hear about the UAH application?")    
 
         
