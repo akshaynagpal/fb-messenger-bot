@@ -8,6 +8,7 @@ watson = watson.ConversationAPI(workspace_id)
 
 import requests
 from flask import Flask, request
+from flask import render_template
 
 app = Flask(__name__)
 
@@ -22,6 +23,15 @@ def verify():
         return request.args["hub.challenge"], 200
 
     return "Hello world", 200
+
+@app.route('/feedback')
+def displayQuestionForm():
+    return render_template("feedbackForm.html")
+
+@app.route('/feedback',methods=['POST'])
+def storeQuestion():
+    question =  request.form['question']
+    return question
 
 
 @app.route('/', methods=['POST'])
