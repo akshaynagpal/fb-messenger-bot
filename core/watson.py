@@ -32,7 +32,18 @@ class ConversationAPI:
         print json.dumps(response)
         return ''.join(response['output']['text'])
 
+    def return_intent_entity(self,
+                user_id,
+                message):
+        response = self.conversation.message(
+            workspace_id=self.workspace_id,
+            message_input={'text': message},
+            context=self.lookup(user_id)
+        )
+        self.context_map[user_id] = response['context']
 
+        print json.dumps(response)
+        return response['intents'],response['entities']
 
     
 if __name__ == '__main__':
