@@ -3,12 +3,12 @@ import json
 
 class ConversationAPI:
     def __init__(self,
-                 workspace_id):
-        self.workspace_id = workspace_id
+                 config):
+        self.workspace_id = config['workspace_id']
         self.conversation =  ConversationV1(
-            username='a369ed8c-85a9-44a2-9d39-33088ee711e0',
-            password='mmRegjAWDWf6',
-            version='2016-10-28'
+            username=config['username'],
+            password=config['password'],
+            version=config['version']
         )
 
         # user id to watson context
@@ -45,10 +45,26 @@ class ConversationAPI:
         print json.dumps(response)
         return response['intents'],response['entities']
 
+def akshay_config():
+    config = {}
+    config['password'] = 'mmRegjAWDWf6' 
+    config['username'] = 'a369ed8c-85a9-44a2-9d39-33088ee711e0'
+    config['workspace_id'] = '0a4faa68-f36a-4d78-85b9-107e4e94e300'
+    config['version'] = '2016-10-28'
+    return config
+
+def rohan_config():
+    config = {}
+    config['workspace_id'] = '85ba0890-6fa8-4ca7-87af-b1b92cb6d10f'
+    config['username'] = '351251b5-22a9-4f30-9d04-884aff0aae4a'
+    config['password'] = 'zwgLdqOlcfYi'
+    config['version'] = '2016-09-20'
+    return config
     
 if __name__ == '__main__':
-    workspace_id = '0a4faa68-f36a-4d78-85b9-107e4e94e300'
-    watson = ConversationAPI(workspace_id)
+    
+    
+    watson = ConversationAPI(rohan_config())
     # print watson.message(1, "hi")
     # print watson.message(1, "deadline for phd compsci")
     print watson.message(1, "I have a problem with my crd")

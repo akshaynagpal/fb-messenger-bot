@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Feedback form</title>
-	<h1> Feedback for Research Purpose </h1>
-</head>
-<body>
-    <div id ="question"> Question: {{question}}</div>
-    <div id = "intent">Watson detected Intent: {{intent}}</div>
-    <div id="entity">Watson detected Entity: {{entity}}</div>
+
+  {% extends "bootstrap/base.html" %}
+{% block title %}Feedback form{% endblock %}
+{% block content %}
+<div class="container-fluid" style="margin-top:20px;">
+<div  class="row text-center">
+    <h4 id ="question"> Question: {{question}}</h4>
+    <h4 id = "intent">Watson detected Intent: {{intent}}</h4>
+    <h4 id="entity">Watson detected Entity: {{entity}}</h4>
     Entity and Intent according to you:<br>
 	<form action="feedbackSubmit" method = POST>
 		Intent: <input type="text" name="intent_user" required><br>
@@ -15,6 +14,7 @@
 		<input type="submit" name="submitIntentEntity" value="Send Intent & Entity">
 	</form>
 
+</div>
+</div>	
 
-</body>
-</html>
+{% endblock %}

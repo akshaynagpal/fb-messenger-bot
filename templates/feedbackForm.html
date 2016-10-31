@@ -1,22 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Feedback form</title>
-	<h1> Feedback for Research Purpose </h1>
-</head>
-<body>
+{% extends "bootstrap/base.html" %}
+{% block title %}Feedback form{% endblock %}
+{% block content %}
+<div class="container-fluid" style="margin-top:20px;">
+<div  class="row text-center">
 {% if question %}
     <div id ="question"> Question: {{question}}</div>
     <div id = "intent">Intent: {{intent}}</div>
     <div id="entity">Entity: {{entity}}</div>
     <div id="watsonReply"></div>
 {% else %}
-<form action="feedback" method = POST>
+<form name="queryForm" action="feedback" onsubmit="return validateForm()" method = POST>
 	<input type="text" name="question">
 	<input type="submit" name="submitQuestion" value="Send Question">
 </form>
 {% endif %}
+</div>
+</div>
+{% endblock %}
 
-
-</body>
-</html>
+{% block scripts %}
+<script>
+function validateForm() {
+    var x = document.forms["queryForm"]["question"].value;
+    if (x == null || x == "") {
+        alert("Question must be filled out");
+        return false;
+    }
+}
+</script>
+{% endblock %}

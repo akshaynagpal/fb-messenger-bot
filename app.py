@@ -4,20 +4,29 @@ import json
 from core import watson
 import csv
 
-workspace_id = '0a4faa68-f36a-4d78-85b9-107e4e94e300'
-watson = watson.ConversationAPI(workspace_id)
+watson = watson.ConversationAPI(watson.rohan_config())
 
 import requests
 from flask import Flask, request
 from flask import render_template
+from flask_bootstrap import Bootstrap
 
-app = Flask(__name__)
+
+def create_app():
+  app = Flask(__name__)
+  Bootstrap(app)
+
+  return app
+
+app = create_app()
 
 question_user = None
 intent_user = None
 intent_watson = None
 entity_user = None
 entity_watson = None
+
+
 
 @app.route('/', methods=['GET'])
 def verify():
