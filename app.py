@@ -2,15 +2,22 @@ import os
 import sys
 import json
 from core import watson
+import csv
 
-workspace_id = '08bf5014-cfaf-4b62-b6f6-6064517883f7'
+workspace_id = '0a4faa68-f36a-4d78-85b9-107e4e94e300'
 watson = watson.ConversationAPI(workspace_id)
 
 import requests
 from flask import Flask, request
+from flask import render_template
 
 app = Flask(__name__)
 
+question_user = None
+intent_user = None
+intent_watson = None
+entity_user = None
+entity_watson = None
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -23,12 +30,43 @@ def verify():
 
     return "Hello world", 200
 
+@app.route('/feedback', methods=['GET','POST'])
+def displayQuestionForm():
+    global entity_watson,intent_watson,question_user,entity_user,intent_user
+    if request.method=='POST':
+        question =  request.form['question']
+        question_user = question
+        print question
+        intents,entities = watson.return_intent_entity('0', question)
+        print 'reply='+str(intents[0]['intent'])+str(entities)
+
+        if(len(intents)>0):
+            intent_watson = intents[0]['intent']
+            if(len(entities)>0):
+                entity_watson = entities[0]['entity']
+                return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity=entity_watson)
+            else:
+                return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity="entity not found") 
+        else:
+            return render_template("intentEntityForm.html",question = question,intent="intent not found",entity="entity not found")
+    else:
+        return render_template("feedbackForm.html")
+
+@app.route('/feedbackSubmit',methods=['POST'])
+def feedbackSubmit():
+    global entity_watson,intent_watson,question_user,entity_user,intent_user 
+    entity_user = request.form['entity_user']
+    intent_user = request.form['intent_user']
+    print str(entity_watson)+" "+str(intent_watson)+" "+str(entity_user)+" "+str(intent_user)+" "+str(question_user)
+    log(str(entity_watson)+" "+str(intent_watson)+" "+str(entity_user)+" "+str(intent_user)+" "+str(question_user))
+    with open('dataCollected/dataCollected.csv','a') as csvFile:
+        csvFileWriter = csv.writer(csvFile)
+        csvFileWriter.writerow([str(question_user),str(entity_watson),str(intent_watson),str(entity_user),str(intent_user)])
+    return render_template("thanks.html")
 
 @app.route('/', methods=['POST'])
 def webhook():
-
     # endpoint for processing incoming messaging events
-
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
 
@@ -124,5 +162,4 @@ def log(message):  # simple wrapper for logging to stdout on heroku
 
 
 if __name__ == '__main__':
-
-    app.run(debug=True)
+    app.run(debug=True) 
