@@ -1,8 +1,10 @@
 import os
 import sys
 import json
-from core import watson
+from core import watson, solr
+
 import csv
+
 
 watson = watson.ConversationAPI(watson.rohan_config())
 
@@ -19,6 +21,7 @@ def create_app():
   return app
 
 app = create_app()
+
 
 question_user = None
 intent_user = None
@@ -48,12 +51,14 @@ def displayQuestionForm():
         print question
         intents,entities = watson.return_intent_entity('0', question)
         print 'reply='+str(intents[0]['intent'])+str(entities)
+        solr_response = solr.query(question)
+#        print solr_response['docs'][0]['body']
 
         if(len(intents)>0):
             intent_watson = intents[0]['intent']
             if(len(entities)>0):
                 entity_watson = entities[0]['entity']
-                return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity=entity_watson)
+                return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity=entity_watson, document=solr_response[0]['body'])
             else:
                 return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity="entity not found") 
         else:
