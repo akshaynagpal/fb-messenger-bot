@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Feedback form</title>
+	<h1> Feedback for Research Purpose </h1>
+</head>
+<body>
+{% if question %}
+    <div id ="question"> Question: {{question}}</div>
+    <div id = "intent">Intent: {{intent}}</div>
+    <div id="entity">Entity: {{entity}}</div>
+    <div id="watsonReply"></div>
+{% else %}
+<form action="feedback" method = POST>
+	<input type="text" name="question">
+	<input type="submit" name="submitQuestion" value="Send Question">
+</form>
+{% endif %}
+
+
+</body>
+</html>

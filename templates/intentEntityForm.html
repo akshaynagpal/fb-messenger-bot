@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Feedback form</title>
+	<h1> Feedback for Research Purpose </h1>
+</head>
+<body>
+    <div id ="question"> Question: {{question}}</div>
+    <div id = "intent">Watson detected Intent: {{intent}}</div>
+    <div id="entity">Watson detected Entity: {{entity}}</div>
+    Entity and Intent according to you:<br>
+	<form action="feedbackSubmit" method = POST>
+		Intent: <input type="text" name="intent_user" required><br>
+		Entity: <input type="text" name="entity_user" required>
+		<input type="submit" name="submitIntentEntity" value="Send Intent & Entity">
+	</form>
+
+
+</body>
+</html>
