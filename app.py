@@ -6,9 +6,10 @@ from core import watson, solr
 import csv
 
 
-watson = watson.ConversationAPI(watson.rohan_config())
+watson = watson.ConversationAPI(watson.rohan_admissions_config())
 
 import requests
+import flask
 from flask import Flask, request
 from flask import render_template
 from flask_bootstrap import Bootstrap
@@ -40,14 +41,14 @@ def verify():
             return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
 
-    return "Hello world", 200
+    return "<iframe style='height:480px; width:402px' src='https://webchat.botframework.com/embed/columbia_gsa?s=IS8x4dnvEn0.cwA.nDo.jvSNX4-7WysnDMlYSVYIiVsnjjNyWHGjeZUZ396IVH8'></iframe>", 200
 
 @app.route('/feedback', methods=['GET','POST'])
 def displayQuestionForm():
     global entity_watson,intent_watson,question_user,entity_user,intent_user
     if request.method=='POST':
         question =  request.form['question']
-        question_user = question
+        Question_user = question
         print question
         intents,entities = watson.return_intent_entity('0', question)
         print 'reply='+str(intents[0]['intent'])+str(entities)
@@ -100,6 +101,15 @@ def webhook():
 
     return "ok", 200
 
+@app.route('/test_microsoft', methods=['POST', 'GET'])
+def basic_message():
+    data = request.get_json()
+    log(data)
+    conv_id = data['address']['conversation']['id']
+    message = data['text']
+    response = watson.json_response(conv_id, message)
+    log(response)
+    return flask.jsonify(response)
 
 def received_message(messaging_event):
     

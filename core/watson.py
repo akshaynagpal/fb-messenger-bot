@@ -18,6 +18,19 @@ class ConversationAPI:
         if user_id not in self.context_map:
             self.context_map[user_id] = {}
         return self.context_map[user_id]
+
+    def json_response(self,
+                      user_id,
+                      message):
+        response = self.conversation.message(
+            workspace_id=self.workspace_id,
+            message_input={'text': message},
+            context=self.lookup(user_id)
+        )
+        self.context_map[user_id] = response['context']
+        return response
+
+        
     # Send message to watson conversation agent
     def message(self,
                 user_id,
@@ -60,7 +73,15 @@ def rohan_config():
     config['password'] = 'zwgLdqOlcfYi'
     config['version'] = '2016-09-20'
     return config
-    
+
+def rohan_admissions_config():
+    config = {}
+    config['workspace_id'] = '08bf5014-cfaf-4b62-b6f6-6064517883f7'
+    config['username'] = '351251b5-22a9-4f30-9d04-884aff0aae4a'
+    config['password'] = 'zwgLdqOlcfYi'
+    config['version'] = '2016-09-20'
+    return config
+
 if __name__ == '__main__':
     
     
