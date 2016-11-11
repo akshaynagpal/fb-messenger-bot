@@ -89,11 +89,12 @@ def print_basic_intents(data, fname):
                 sentences = sent_tokenize(query)
                 for sentence in sentences:
                     sentence = sentence.strip()
-                    if sentence.endswith('?'):
+                    if nlp.sentence_is_question(sentence):
                         writer.writerow([sentence, intent])
                     else:
                         writer.writerow([sentence, "background"])
             except UnicodeDecodeError:
+                print "Error parsing:", query
                 continue
 
 def print_entities(scored_word_entities, outfile, threshold = 0.0):

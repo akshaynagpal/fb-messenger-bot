@@ -1,6 +1,9 @@
 from nltk.tokenize import sent_tokenize, word_tokenize
 import nltk
 
+# consts
+question_key_phrases = ["when", "how", "where", "what", "wondering", "could you"]
+
 # Global
 normalized_word_map = {}
 
@@ -20,6 +23,17 @@ def tokenize_text(text):
     | [][.,;"'?():-_`]      # these are separate tokens
     '''
     return nltk.regexp_tokenize(text, sentence_re)
+
+# assumes sentence is stripped of trailing white space 
+def sentence_is_question(sentence):
+    if sentence.endswith("?"):
+        return True
+
+    for key_word in question_key_phrases:
+        if key_word in sentence.lower():
+            return True
+            
+    return False
 
 # Taken from                 
 # https://gist.github.com/alexbowe/879414
@@ -120,6 +134,16 @@ class TestEntityExtraction(unittest.TestCase):
         self.assertEqual(2, len(nps))
         self.assertEqual("last week", nps[0])
         self.assertEqual("student account", nps[1])
+
+    def test_questions(self):
+        s = "I have a question about housing"
+        self.assertFalse(sentence_is_question(s))
+
+        s = "do you know when I'll receive notification of my application?"
+        self.assertTrue(sentence_is_question(s))
+
+        s = "I just wanted to know when will my application approximately be processed."
+        self.assertTrue(sentence_is_question(s))
 
 
 
