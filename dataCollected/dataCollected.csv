@@ -8,3 +8,4 @@ uni transcript admission hello?,None,cs-hello,"[{u'body': [u'The deadline for tr
 uni hello bye.,None,cs-hello,[],watson
 hi uni question hello?,None,cs-hello,[],solr
 hi hello uni bye.,None,cs-hello,[],watson
+hoi hello uni transcript,None,cs-hello,[],watson

@@ -1,14 +1,21 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}Feedback form{% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Feedback form</title>
+    <h1> Feedback for Research Purpose </h1><hr>
+</head>
+<body>
 <div class="container" style="margin-top:20px;">
 <div  class="row text-center">
-    <h4 id ="question"> Question: {{question}}</h4>
+    <h4 id ="question"> Question: {{question}}</h4><br>
     <ul><h4>Response 1 :</h4></ul>
     <h4 id = "intent">Watson detected Intent: {{intent}}</h4>
-    <h4 id="entity">Watson detected Entity: {{entity}}</h4>
+    <h4 id="entity">Watson detected Entity: {{entity}}</h4><br>
     <ul><h4>Response 2 :</h4></ul>
-    <h4 id="solr">Solr retrieved document: {{document}}</h4>    
+    <h4 id="solr">Solr retrieved document: {{document}}</h4>   <br> 
 	<form action="feedbackSubmit" method = POST>
 		Which Response was the best for the question asked according to you?<br>
         <select id="selectBestResponse" name="selectBestResponse">
@@ -23,5 +30,5 @@
 
 </div>
 </div>	
-
-{% endblock %}
+</body>
+</html>
