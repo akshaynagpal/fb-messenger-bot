@@ -1,7 +1,13 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}Feedback form{% endblock %}
-{% block content %}
-<div class="container-fluid" style="margin-top:20px;">
+<!DOCTYPE html>
+<html>
+<head>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Feedback form</title>
+    <h1> Feedback for Research Purpose </h1><hr>
+</head>
+<body>
 <div  class="row text-center">
 {% if question %}
     <div id ="question"> Question: {{question}}</div>
@@ -9,16 +15,14 @@
     <div id="entity">Entity: {{entity}}</div>
     <div id="watsonReply"></div>
 {% else %}
-<form name="queryForm" action="feedback" onsubmit="return validateForm()" method = POST>
-	<input type="text" name="question">
+<form name="queryForm" action="feedback" method = "POST">
+	<textarea name="question" cols="50" rows="5" required></textarea><br>
 	<input type="submit" name="submitQuestion" value="Send Question">
 </form>
 {% endif %}
 </div>
 </div>
-{% endblock %}
 
-{% block scripts %}
 <script>
 function validateForm() {
     var x = document.forms["queryForm"]["question"].value;
@@ -28,4 +32,5 @@ function validateForm() {
     }
 }
 </script>
-{% endblock %}
+</body>
+</html>
