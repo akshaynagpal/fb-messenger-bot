@@ -10,3 +10,4 @@ wsgiref==0.1.2
 watson-developer-cloud==0.20.0
 nltk==3.0.2
 flask-bootstrap==3.3.7.0
+psycopg2==2.6.2

@@ -46,33 +46,29 @@ def verify():
 
 @app.route('/feedback', methods=['GET','POST'])
 def displayQuestionForm():
-    global entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response
+    global question, entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response
     if request.method=='POST':
         question =  request.form['question']
         question_user = question
         
         intents,entities = watson.return_intent_entity('0', question)
         # print 'reply='+str(intents[0]['intent'])+str(entities)
-        solr_response = solr.query(question)
-        # print 'solrResponse = '+solr_response['docs'][0]['body']
-#        print solr_response['docs'][0]['body']
+        solr_response = solr.query(question)[0]['body'][0]
+    #        print solr_response['docs'][0]['body']
 
         if(len(intents)>0):
             intent_watson = intents[0]['intent']
-            if(len(entities)>0):
-                entity_watson = entities[0]['entity']
-                return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity=entity_watson, document=solr_response[0]['body'])
-            else:
-                return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity="entity not found") 
-        else:
-            return render_template("intentEntityForm.html",question = question,intent="intent not found",entity="entity not found")
+        if(len(entities)>0):
+            entity_watson = entities[0]['entity']
     else:
         return render_template("feedbackForm.html")
+            
+    return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity=entity_watson, document=solr_response)
 
 @app.route('/feedbackSubmit',methods=['POST'])
 def feedbackSubmit():
     urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse("postgres://uzbaturmpnthfb:cZY4MyX2Pj6cjwiPGQx5jGtNSf@ec2-54-225-211-218.compute-1.amazonaws.com:5432/d2qpp6s0751vns")
+    url = urlparse.urlparse("postgres://lgqekudqzhiqnc:Cvv7mAL-Ef6U2Pyfc2fHnVPAfm@ec2-54-225-211-218.compute-1.amazonaws.com:5432/d9gtf85ta0q1lv")
     conn = psycopg2.connect(
         database=url.path[1:],
         user=url.username,
@@ -85,11 +81,9 @@ def feedbackSubmit():
     conn.commit();
     global entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response
     bestResponse = request.form['selectBestResponse']
-    print str(entity_watson)+" "+str(intent_watson)+" "+str(solr_response)+" "+str(bestResponse)+" "+str(question_user)
+
     log(str(entity_watson)+" "+str(intent_watson)+" "+str(solr_response)+" "+str(bestResponse)+" "+str(question_user))
-    with open('dataCollected/dataCollected.csv','a') as csvFile:
-        csvFileWriter = csv.writer(csvFile)
-        csvFileWriter.writerow([str(question_user),str(entity_watson),str(intent_watson),str(solr_response),str(bestResponse)])
+
     cur.execute("INSERT INTO responses(question_user, entity_watson, intent_watson, solr_response, bestResponse) VALUES ('%s','%s','%s','%s','%s');"%(question_user,entity_watson, intent_watson, solr_response, bestResponse))
     conn.commit();
     conn.close()
