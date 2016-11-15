@@ -82,14 +82,23 @@ def rohan_admissions_config():
     config['version'] = '2016-09-20'
     return config
 
+def graduate_affairs_2_config():
+    config = {}
+    config['workspace_id'] = '2ee0f789-8257-4b46-b1f8-80d3e2242c51'
+    config['username'] = '351251b5-22a9-4f30-9d04-884aff0aae4a'
+    config['password'] = 'zwgLdqOlcfYi'
+    config['version'] = '2016-09-20'
+    return config
+    
+
 if __name__ == '__main__':
     
     
-    watson = ConversationAPI(rohan_config())
+    watson = ConversationAPI(graduate_affairs_2_config())
     # print watson.message(1, "hi")
     # print watson.message(1, "deadline for phd compsci")
-    print watson.message(1, "I have a problem with my crd")
-    print watson.message(1, "I have an issue with my UNI") 
+    print watson.json_response(1, "I submitted uah applications (including International House) a while ago. I was wondering when the results will come out? ")
+    print watson.json_response(1, "How to transfer my I20 from another school?") 
 
 
 

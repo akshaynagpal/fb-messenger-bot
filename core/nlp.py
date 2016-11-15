@@ -1,11 +1,21 @@
 from nltk.tokenize import sent_tokenize, word_tokenize
 import nltk
+import re, string
 
 # consts
 question_key_phrases = ["when", "how", "where", "what", "wondering", "could you"]
 
 # Global
 normalized_word_map = {}
+
+pattern = re.compile('[\W_]+')
+
+# Return sentences for some text
+def get_sentences(text):
+    return sent_tokenize(text)
+
+def strip_nonalpha_numeric(word):
+    return re.sub(pattern, '', word)
 
 
 def add_to_normalized_word_map(key, value):
@@ -145,6 +155,10 @@ class TestEntityExtraction(unittest.TestCase):
 
         s = "I just wanted to know when will my application approximately be processed."
         self.assertTrue(sentence_is_question(s))
+
+    def test_strip_nonalphanumeric(self):
+        self.assertEqual("I20", strip_nonalpha_numeric("I20"))
+        self.assertEqual("USA", strip_nonalpha_numeric("U.S.A"))        
 
 
 
