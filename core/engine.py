@@ -3,18 +3,19 @@ import nlp
 
 class Engine:
     def __init__(self,
-                 entity_confidence_thresh = .5,
                  intent_confidence_thresh = .25):
-        self.entity_thresh = entity_confidence_thresh
         self.intent_thresh = intent_confidence_thresh
         self.conversation_context = {}
         self.watson = watson.ConversationAPI(watson.graduate_affairs_2_config())
 
     def extract_entities(self, response):
-        print response
+        entities = [x['entity'] for x in response['entities']]
+        print entities
         pass
     
     def extract_intent(self, response):
+        intents = [x['intent'] for x in response['intents'] if x['confidence'] > self.intent_thresh]
+        print intents
         pass
 
     def preprocess_token(self, token):
@@ -63,6 +64,7 @@ def main():
     
     for i, line in enumerate(data):
         query = line[0]
+        print "Query: ", query
         engine.process_message(i, query)
         
     
