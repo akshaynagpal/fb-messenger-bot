@@ -8,15 +8,24 @@ class Engine:
         self.conversation_context = {}
         self.watson = watson.ConversationAPI(watson.graduate_affairs_2_config())
 
-    def extract_entities(self, response):
+    def initialize_context(self, conv_id):
+        if conv_id not in self.conversation_context:
+            v = {'entities':set(), 'intent':None}
+            self.conversation_context[conv_id] = v
+
+    def clear_context(self, conv_id):
+        self.conversation_context.pop(conv_id, None)
+            
+
+    def extract_entities(self, conv_id, response):
         entities = [x['entity'] for x in response['entities']]
-        print entities
-        pass
+        self.conversation_context[conv_id]['entities'].update(entities)
+
     
-    def extract_intent(self, response):
+    def extract_intent(self, conv_id, response):
         intents = [x['intent'] for x in response['intents'] if x['confidence'] > self.intent_thresh]
-        print intents
-        pass
+        if len(intents) > 0:
+            self.conversation_context[conv_id]['intent'] = intents[0]
 
     def preprocess_token(self, token):
         token = nlp.strip_nonalpha_numeric(token)
@@ -34,13 +43,19 @@ class Engine:
         
         
     def process_message(self, conv_id, message):
+        
+        self.initialize_context(conv_id)
         sentences = nlp.get_sentences(message)
         for sentence in sentences:
-            sentence = self.preprocess_sentence(sentence)
-            watson_response = self.watson.json_response(conv_id, sentence)
-            self.extract_entities(watson_response)
+            clean_sentence = self.preprocess_sentence(sentence)
+            watson_response = self.watson.json_response(conv_id, clean_sentence)
+            self.extract_entities(conv_id, watson_response)
             if nlp.sentence_is_question(sentence):
-                self.extract_intent(watson_response)
+                self.extract_intent(conv_id,watson_response)
+                return self.conversation_context[conv_id]
+            
+        return self.conversation_context[conv_id]
+                
             
             
 def read_tsv(fname):

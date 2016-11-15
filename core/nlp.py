@@ -12,7 +12,14 @@ pattern = re.compile('[\W_]+')
 
 # Return sentences for some text
 def get_sentences(text):
-    return sent_tokenize(text)
+    sentences
+    try:
+        sentences = sent_tokenize(text)
+    except UnicodeDecodeError :
+        sentences = text.split('.') # Super basic sentence splitting
+        print "Trouble parsing: " + text
+    return sentences
+        
 
 def strip_nonalpha_numeric(word):
     return re.sub(pattern, '', word)
