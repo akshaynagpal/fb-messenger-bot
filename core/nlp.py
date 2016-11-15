@@ -30,6 +30,7 @@ def sentence_is_question(sentence):
         return True
 
     for key_word in question_key_phrases:
+        key_word = " " + key_word + " "
         if key_word in sentence.lower():
             return True
             
