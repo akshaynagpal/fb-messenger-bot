@@ -13,7 +13,7 @@ class Engine:
 
     def initialize_context(self, conv_id):
         if conv_id not in self.conversation_context:
-            v = {'entities':set(), 'intent':None}
+            v = {'entities':set(), 'intent':None, 'response':None}
             self.conversation_context[conv_id] = v
 
     def clear_context(self, conv_id):
