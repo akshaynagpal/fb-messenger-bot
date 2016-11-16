@@ -12,7 +12,7 @@ pattern = re.compile('[\W_]+')
 
 # Return sentences for some text
 def get_sentences(text):
-    sentences
+    sentences = None
     try:
         sentences = sent_tokenize(text)
     except UnicodeDecodeError :

@@ -1,9 +1,12 @@
 import watson
 import nlp
+from response_builder import ResponseBuilder
 
 class Engine:
     def __init__(self,
+                 training_data_path,
                  intent_confidence_thresh = .25):
+        self.response_builder = ResponseBuilder(training_data_path)
         self.intent_thresh = intent_confidence_thresh
         self.conversation_context = {}
         self.watson = watson.ConversationAPI(watson.graduate_affairs_2_config())
@@ -52,6 +55,11 @@ class Engine:
             self.extract_entities(conv_id, watson_response)
             if nlp.sentence_is_question(sentence):
                 self.extract_intent(conv_id,watson_response)
+                context = self.conversation_context[conv_id]
+                intent = context['intent']
+                entities = list(context['entities'])
+                self.conversation_context[conv_id]['response'] = \
+                                                                 self.response_builder.get_best_response(intent, entities)
                 return self.conversation_context[conv_id]
             
         return self.conversation_context[conv_id]
@@ -75,12 +83,12 @@ def main():
     data = read_tsv(args.traintsv)
 
     # initialize engine
-    engine = Engine()
+    engine = Engine(args.traintsv)
     
     for i, line in enumerate(data):
         query = line[0]
         print "Query: ", query
-        engine.process_message(i, query)
+        print engine.process_message(i, query)
         
     
   
