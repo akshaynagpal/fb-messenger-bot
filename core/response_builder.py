@@ -1,4 +1,6 @@
 import nlp
+from fuzzywuzzy import fuzz
+import operator
 
 def read_tsv(fname):
     import csv
@@ -17,9 +19,21 @@ def underscore_entities(entities_w_space):
     return ret
 
 def add_to_response_dict(d,key, response):
-    if key not in d or len(response) < len(d[key]): # favor shorter responses
-        d[key] = response
-            
+    if key not in d:
+        d[key] = {response:1}
+    else:
+        foundExisting = False
+        for resp in d[key].keys():
+            if fuzz.partial_ratio(resp, response) > 50:
+                if len(response) < len(resp): # Prefer shortest response
+                    freq = d[key].pop(resp, None)
+                    d[key][response] = freq + 1
+                else:
+                    d[key][resp] += 1
+                foundExisting = True
+
+        if not foundExisting:
+            d[key][response] = 1
 
 class ResponseBuilder:
     def __init__(self,
@@ -48,7 +62,7 @@ class ResponseBuilder:
             return None
         key = self.build_key(intent, entities)
         if key in self.response_dict:
-            return self.response_dict[key]
+            return max(self.response_dict[key].iteritems(), key=operator.itemgetter(1))[0]
         for entity in entities:
             new_entities = [ent for ent in entities if ent != entity]
             # Recurse with one less entity
