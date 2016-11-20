@@ -1,5 +1,6 @@
 import watson
 import nlp
+from intent_guesser import IntentGuesser
 from response_builder import ResponseBuilder
 
 class Engine:
@@ -7,6 +8,7 @@ class Engine:
                  training_data_path,
                  intent_confidence_thresh = .25):
         self.response_builder = ResponseBuilder(training_data_path)
+        self.intent_guesser = IntentGuesser(training_data_path)
         self.intent_thresh = intent_confidence_thresh
         self.conversation_context = {}
         self.watson = watson.ConversationAPI(watson.graduate_affairs_2_config())
@@ -24,11 +26,24 @@ class Engine:
         entities = [x['entity'] for x in response['entities']]
         self.conversation_context[conv_id]['entities'].update(entities)
 
+    def guess_intent(self, conv_id):
+        intent_guess = self.intent_guesser.guess_intent(
+            list(self.conversation_context[conv_id]['entities']))
+        return intent_guess
+
     
     def extract_intent(self, conv_id, response):
         intents = [x['intent'] for x in response['intents'] if x['confidence'] > self.intent_thresh]
         if len(intents) > 0:
             self.conversation_context[conv_id]['intent'] = intents[0]
+
+        #  if no intents from watson, try to guess using the entities
+        # from the response
+        else:
+            entities = [x['entity'] for x in response['entities']]
+            intent_guess = self.intent_guesser.guess_intent(entities)
+            self.conversation_context[conv_id]['intent'] = intent_guess
+            
 
     def preprocess_token(self, token):
         token = nlp.strip_nonalpha_numeric(token)
@@ -61,6 +76,12 @@ class Engine:
                 self.conversation_context[conv_id]['response'] = \
                                                                  self.response_builder.get_best_response(intent, entities)
                 return self.conversation_context[conv_id]
+
+        # If we haven't yet found an intent using watson,
+        # we can guess using the extracted entities.
+        context = self.conversation_context[conv_id]            
+        if not context['intent']:
+            context['intent'] = self.guess_intent(conv_id)
             
         return self.conversation_context[conv_id]
                 
