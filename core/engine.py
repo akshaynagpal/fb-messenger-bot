@@ -54,6 +54,7 @@ class Engine:
         
     def preprocess_sentence(self, sentence):
         tokens = nlp.tokenize_text(sentence)
+        print tokens
         ret = ""
         for token in tokens:
             ret += self.preprocess_token(token) + " "
