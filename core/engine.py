@@ -67,8 +67,10 @@ class Engine:
     def process_message(self, conv_id, message):
         
         self.initialize_context(conv_id)
+        print message
         sentences = nlp.get_sentences(message)
         for sentence in sentences:
+            print sentence
             clean_sentence = self.preprocess_sentence(sentence)
             watson_response = self.watson.json_response(conv_id, clean_sentence)
             self.extract_entities(conv_id, watson_response)
