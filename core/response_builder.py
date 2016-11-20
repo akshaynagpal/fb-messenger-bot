@@ -86,7 +86,7 @@ def main():
     entities = ["Uni", "Alias"]
     print resp.get_best_response(intent, entities)
     intent = "Notification"
-    entities = ["UAH", "Housing"]
+    entities = ['Registration', 'UAH', 'Uni']
     print resp.get_best_response(intent, entities)
 
 

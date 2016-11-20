@@ -73,9 +73,9 @@ class Engine:
                 context = self.conversation_context[conv_id]
                 intent = context['intent']
                 entities = list(context['entities'])
-                self.conversation_context[conv_id]['response'] = \
-                                                                 self.response_builder.get_best_response(intent, entities)
-                return self.conversation_context[conv_id]
+                context['response'] = \
+                                      self.response_builder.get_best_response(intent, entities)
+                return context
 
         # If we haven't yet found an intent using watson,
         # we can guess using the extracted entities.
@@ -83,7 +83,7 @@ class Engine:
         if not context['intent']:
             context['intent'] = self.guess_intent(conv_id)
             
-        return self.conversation_context[conv_id]
+        return context
                 
             
             
