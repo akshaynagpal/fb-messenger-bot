@@ -2,6 +2,7 @@ import watson
 import nlp
 from intent_guesser import IntentGuesser
 from response_builder import ResponseBuilder
+import copy
 
 class Engine:
     def __init__(self,
@@ -88,8 +89,10 @@ class Engine:
                                   self.response_builder.get_best_response(
                                       context['intent'],
                                       context['entities'])
-            
-        return context
+
+        ret = copy.deepcopy(context)
+        self.clear_context(conv_id)
+        return ret
                 
             
             

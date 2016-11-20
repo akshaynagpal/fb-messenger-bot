@@ -1,13 +1,15 @@
 import os
 import sys
 import json
-from core import watson, solr
+from core import watson as w, solr
 import psycopg2
 import csv
 import urlparse
+from core.engine import Engine
 
-
-watson = watson.ConversationAPI(watson.rohan_admissions_config())
+watson = w.ConversationAPI(w.graduate_affairs_2_config())
+demo_watson = w.ConversationAPI(w.rohan_admissions_config())
+engine = Engine('training/question-answers-2016-11-10.tsv')
 
 import requests
 import flask
@@ -46,24 +48,25 @@ def verify():
 
 @app.route('/feedback', methods=['GET','POST'])
 def displayQuestionForm():
-    global question, entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response
+    global question, entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response, answer
     if request.method=='POST':
         question =  request.form['question']
         question_user = question
-        
+        result = engine.process_message(1, question)
+        answer = result['response']
         intents,entities = watson.return_intent_entity('0', question)
         # print 'reply='+str(intents[0]['intent'])+str(entities)
-        solr_response = solr.query(question)[0]['body'][0]
+        #solr_response = solr.query(question)[0]['body'][0]
     #        print solr_response['docs'][0]['body']
 
         if(len(intents)>0):
-            intent_watson = intents[0]['intent']
+            intent_watson = result['intent']
         if(len(entities)>0):
             entity_watson = entities[0]['entity']
     else:
         return render_template("feedbackForm.html")
             
-    return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity=entity_watson, document=solr_response)
+    return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity=entity_watson, document=None, response=answer)
 
 @app.route('/feedbackSubmit',methods=['POST'])
 def feedbackSubmit():
@@ -117,7 +120,7 @@ def basic_message():
     log(data)
     conv_id = data['address']['conversation']['id']
     message = data['text']
-    response = watson.json_response(conv_id, message)
+    response = demo_watson.json_response(conv_id, message)
     log(response)
     return flask.jsonify(response)
 
