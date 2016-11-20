@@ -1,4 +1,14 @@
-# Facebook Messenger Bot
-This is a simple python template that uses Flask to build a webhook for Facebook's Messenger Bot API.
+# Graduate Affairs Conversational Agent
 
-Read more in my [tutorial that uses this repository](https://blog.hartleybrody.com/fb-messenger-bot/)
+## Installation
+* Depends on python 2.7
+* To install third party packages: `pip install -r /path/to/requirements.txt`
+
+## Running web app
+`python app.py`
+
+## Evaluating a dataset
+`python evaluation.py [question-answer-data.tsv] > experiment_results`
+
+
+
