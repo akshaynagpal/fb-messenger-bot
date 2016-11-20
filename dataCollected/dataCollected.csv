@@ -9,3 +9,7 @@ uni hello bye.,None,cs-hello,[],watson
 hi uni question hello?,None,cs-hello,[],solr
 hi hello uni bye.,None,cs-hello,[],watson
 hoi hello uni transcript,None,cs-hello,[],watson
+hi hello,None,cs-hello,[],solr
+transcript issue?,None,cs-yes,"[{u'body': [u'The deadline for transcripts was set in coordination with registration procedures, so it will not affect your Fall 2016 registration. However, if your final/official transcripts are not received by Oct. 7, a hold will be placed on your registration for Spring 2017.bla bla bla']}]",solr
+transcript issue?,None,cs-yes,"[{u'body': [u'The deadline for transcripts was set in coordination with registration procedures, so it will not affect your Fall 2016 registration. However, if your final/official transcripts are not received by Oct. 7, a hold will be placed on your registration for Spring 2017.bla bla bla']}]",watson
+transcript issue?,None,cs-yes,"[{u'body': [u'The deadline for transcripts was set in coordination with registration procedures, so it will not affect your Fall 2016 registration. However, if your final/official transcripts are not received by Oct. 7, a hold will be placed on your registration for Spring 2017.bla bla bla']}]",three
