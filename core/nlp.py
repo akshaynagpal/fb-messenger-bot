@@ -40,7 +40,7 @@ def tokenize_text(text):
     | \.\.\.                # ellipsis
     | [][.,;"'?():-_`]      # these are separate tokens
     '''
-    return nltk.regexp_tokenize(text, sentence_re)
+    return nltk.word_tokenize(text)
 
 # assumes sentence is stripped of trailing white space 
 def sentence_is_question(sentence):
