@@ -1,5 +1,6 @@
-from nltk.tokenize import sent_tokenize, word_tokenize
 import nltk
+nltk.data.path.append('./nltk_data/')
+from nltk.tokenize import sent_tokenize, word_tokenize
 import re, string
 
 # consts
