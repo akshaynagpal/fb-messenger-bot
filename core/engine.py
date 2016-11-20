@@ -59,7 +59,9 @@ class Engine:
         return ret.strip()
             
         
-        
+
+    # Process message focuses on the question or intent of the message above all else. For sentences that don't express intent, it collects entities. If it doesn't find an intent but finds entities it will make it's best guess at an intent, and corresponding response
+    
     def process_message(self, conv_id, message):
         
         self.initialize_context(conv_id)
@@ -82,6 +84,10 @@ class Engine:
         context = self.conversation_context[conv_id]            
         if not context['intent']:
             context['intent'] = self.guess_intent(conv_id)
+            context['response'] = \
+                                  self.response_builder.get_best_response(
+                                      context['intent'],
+                                      context['entities'])
             
         return context
                 

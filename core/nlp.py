@@ -153,6 +153,13 @@ class TestEntityExtraction(unittest.TestCase):
         self.assertEqual("last week", nps[0])
         self.assertEqual("student account", nps[1])
 
+        s = "I made a very serious mistake with my housing application offers."
+        nps = get_nounphrases(s, False)
+        self.assertEqual(2, len(nps))
+        self.assertEqual("serious mistake", nps[0])
+        self.assertEqual("housing application offers", nps[1])
+        
+
     def test_questions(self):
         s = "I have a question about housing"
         self.assertFalse(sentence_is_question(s))

@@ -75,7 +75,6 @@ class IntentGuesser:
         helper(ents)
         if len(potential_intents) == 0:
             return None
-        print potential_intents
         
         most_likely_intent = max(potential_intents.iteritems(), key=operator.itemgetter(1))[0]
         return most_likely_intent
