@@ -56,8 +56,7 @@ def displayQuestionForm():
         answer = result['response']
         intents,entities = watson.return_intent_entity('0', question)
         # print 'reply='+str(intents[0]['intent'])+str(entities)
-        #solr_response = solr.query(question)[0]['body'][0]
-    #        print solr_response['docs'][0]['body']
+        solr_response = ''.join(solr.query(question)[0]['title'])
 
         if(len(intents)>0):
             intent_watson = result['intent']
@@ -66,7 +65,12 @@ def displayQuestionForm():
     else:
         return render_template("feedbackForm.html")
             
-    return render_template("intentEntityForm.html",question = question,intent=intents[0]['intent'],entity=entity_watson, document=None, response=answer)
+    return render_template("intentEntityForm.html",
+                           question = question,
+                           intent=intents[0]['intent'],
+                           entity=entity_watson,
+                           link=solr_response,
+                           response=answer)
 
 @app.route('/feedbackSubmit',methods=['POST'])
 def feedbackSubmit():
@@ -82,7 +86,7 @@ def feedbackSubmit():
     cur = conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS responses(question_user TEXT, entity_watson TEXT, intent_watson TEXT, solr_response TEXT, bestResponse TEXT);")
     conn.commit();
-    global entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response
+    global entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response, answer
     bestResponse = request.form['selectBestResponse']
 
     log(str(entity_watson)+" "+str(intent_watson)+" "+str(solr_response)+" "+str(bestResponse)+" "+str(question_user))

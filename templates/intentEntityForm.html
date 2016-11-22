@@ -16,13 +16,14 @@
     <h4 id="entity">Watson detected Entity: {{entity}}</h4><br>
     <h4 id="response">Engine built response: {{response}}</h4><br>    
     <ul><h3>Response 2 :</h4></ul>
-    <h4 id="solr">Solr retrieved document: {{document}}</h4>   <br> 
+    <h4 id="solr">Solr retrieved link: {{link}}</h4>   <br> 
 	<form action="feedbackSubmit" method = POST>
 		Which Response was the best for the question asked according to you?<br>
         <select id="selectBestResponse" name="selectBestResponse">
             <option value="0">Please select</option>
             <option value="watson">1</option>
             <option value="solr">2</option>
+            <option value="both">Both</option>	    
             <option value="none">None of the above</option>
         </select>
 		<input type="submit" class="btn btn-success" name="submitIntentEntity" value="Send Intent & Entity">
