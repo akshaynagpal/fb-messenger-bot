@@ -43,6 +43,8 @@ class ResponseBuilder:
         for line in data:
             query = line[0]
             response = line[1]
+            if not response.strip():
+                continue
             intent = line[2]
             entities = underscore_entities(line[3].split(','))
             key = self.build_key(intent, entities)
@@ -57,19 +59,51 @@ class ResponseBuilder:
         l.insert(0, intent)
         return tuple(l)
 
-    def get_best_response(self, intent, entities):
-        if len(entities) == 0 or intent is None:
+    def get_best_response(self, intent_, entities_):
+        cache = set()
+        potential_responses = {}
+        def helper(intent, entities):
+            if len(entities) == 0 or intent is None:
+                return None
+            key = self.build_key(intent, entities)
+            if key in cache:
+                return
+            cache.add(key)
+            if key in self.response_dict:
+                response = max(self.response_dict[key].iteritems(),
+                                   key=operator.itemgetter(1))
+                freq = response[1]
+                key_dim = len(key)
+                if response[0] in potential_responses:
+                    val = potential_responses[response[0]]
+                    freq += val[0]
+                    key_dim = max(key_dim, val[1])
+
+                potential_responses[response[0]] = (freq, key_dim)
+
+                
+            for entity in entities:
+                new_entities = [ent for ent in entities if ent != entity]
+                # Recurse with one less entity
+                helper(intent, new_entities)
+        helper(intent_, entities_)
+        if len(potential_responses) == 0:
             return None
-        key = self.build_key(intent, entities)
-        if key in self.response_dict:
-            return max(self.response_dict[key].iteritems(), key=operator.itemgetter(1))[0]
-        for entity in entities:
-            new_entities = [ent for ent in entities if ent != entity]
-            # Recurse with one less entity
-            response = self.get_best_response(intent, new_entities)
-            if response:
-                return response
-        return None
+
+        response_list = []
+        for k,v in potential_responses.items():
+            row = []
+            row.append(k)
+            row.extend(list(v))
+            response_list.append(row)
+
+        # sort by freq and then by dimension
+        response_list.sort(key=lambda x: x[1], reverse=True)
+        response_list.sort(key=lambda x: x[2], reverse=True)
+        print response_list
+        return response_list[0][0]
+        
+        
             
                 
         
