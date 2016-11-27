@@ -66,9 +66,9 @@ def akshay_config():
     config['version'] = '2016-10-28'
     return config
 
-def rohan_config():
+def rohan_graduate_affairs_config():
     config = {}
-    config['workspace_id'] = '85ba0890-6fa8-4ca7-87af-b1b92cb6d10f'
+    config['workspace_id'] = '01dbc7a0-fde8-4141-a2cc-7b12360cbdd1'
     config['username'] = '351251b5-22a9-4f30-9d04-884aff0aae4a'
     config['password'] = 'zwgLdqOlcfYi'
     config['version'] = '2016-09-20'

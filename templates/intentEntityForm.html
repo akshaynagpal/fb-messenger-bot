@@ -24,7 +24,12 @@
 	<div class="col-md-4 offset-md-4">    
 	    <h3><span class="label label-default">Response 1</span></h3>
 	    <h4 id="intent">Watson detected Intent: <span class="label label-info">{{intent}}</span></h4>
-	    <h4 id="entity">Watson detected Entity: <span class="label label-primary">{{entity}}</span></h4><br>
+	    <h4 id="entity">Watson detected Entities: <span class="label label-primary">{{entity}}</span></h4><br>
+	    <ul class="list-group">
+	      {% for entity in entities %}
+	      <li class="list-group-item">{{ entity }}</li>
+	      {% endfor %}
+	    </ul>
 	    <h4 id="response">Engine built response:</h4><p class="lead"> {{response}}</p><br>
 	  </div>
 	  <div class="col-md-4">

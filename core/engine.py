@@ -79,6 +79,7 @@ class Engine:
                 entities = list(context['entities'])
                 context['response'] = \
                                       self.response_builder.get_best_response(intent, entities)
+                self.clear_context(conv_id)
                 return context
 
         # If we haven't yet found an intent using watson,

@@ -57,18 +57,19 @@ def displayQuestionForm():
         intents,entities = watson.return_intent_entity('0', question)
         # print 'reply='+str(intents[0]['intent'])+str(entities)
         solr_response = ''.join(solr.query(question)[0]['title'])
+        print result['entities']
 
         if(len(intents)>0):
             intent_watson = result['intent']
         if(len(entities)>0):
-            entity_watson = entities[0]['entity']
+            entity_watson = result['entities']
     else:
         return render_template("feedbackForm.html")
             
     return render_template("intentEntityForm.html",
                            question = question,
                            intent=intents[0]['intent'],
-                           entity=entity_watson,
+                           entities=entity_watson,
                            link=solr_response,
                            response=answer)
 
