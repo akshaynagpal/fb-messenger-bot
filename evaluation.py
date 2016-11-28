@@ -24,8 +24,9 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('traintsv')
+    parser.add_argument('testtsv')    
     args = parser.parse_args()
-    data = read_tsv(args.traintsv)
+    data = read_tsv(args.testtsv)
 
     
     # initialize engine

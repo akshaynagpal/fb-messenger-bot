@@ -19,5 +19,7 @@ if __name__ == '__main__':
             print " "
 
         
-    print_results(query( "I submitted uah applications (including International House) a while ago. I was wondering when the results will come out? "))
+    # print_results(query( "I submitted uah applications (including International House) a while ago. I was wondering when the results will come out? "))
+    
+    print_results(query("How do I submit my immunization documentation?", fields=['title']))
 #    print query( "How to transfer my I20 from another school?")[:4]

@@ -9,7 +9,7 @@ from core.engine import Engine
 
 watson = w.ConversationAPI(w.graduate_affairs_2_config())
 demo_watson = w.ConversationAPI(w.rohan_admissions_config())
-engine = Engine('training/question-answers-2016-11-10.tsv')
+engine = Engine('training/question-answers-2016-11-27.tsv')
 
 import requests
 import flask
@@ -54,21 +54,21 @@ def displayQuestionForm():
         question_user = question
         result = engine.process_message(1, question)
         answer = result['response']
-        intents,entities = watson.return_intent_entity('0', question)
+#        intents,entities = watson.return_intent_entity('0', question)
         # print 'reply='+str(intents[0]['intent'])+str(entities)
         solr_response = ''.join(solr.query(question)[0]['title'])
         print result['entities']
 
-        if(len(intents)>0):
+        if result['intent']:
             intent_watson = result['intent']
-        if(len(entities)>0):
+        if len(result['entities']):
             entity_watson = result['entities']
     else:
         return render_template("feedbackForm.html")
             
     return render_template("intentEntityForm.html",
                            question = question,
-                           intent=intents[0]['intent'],
+                           intent=intent_watson,
                            entities=entity_watson,
                            link=solr_response,
                            response=answer)
@@ -136,7 +136,9 @@ def received_message(messaging_event):
     reply = "Sorry, cannot help you at this time!"
     if "text" in messaging_event["message"]:
         message_text = messaging_event["message"]["text"]
-        reply = watson.message(sender_id, message_text)
+        result = engine.message(sender_id, message_text, clear_context=False)
+        if result['intent']:
+          reply = result['response']
 
     send_message(sender_id, reply)
 

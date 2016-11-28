@@ -12,7 +12,7 @@ class Engine:
         self.intent_guesser = IntentGuesser(training_data_path)
         self.intent_thresh = intent_confidence_thresh
         self.conversation_context = {}
-        self.watson = watson.ConversationAPI(watson.graduate_affairs_2_config())
+        self.watson = watson.ConversationAPI(watson.rohan_graduate_affairs_config())
 
     def initialize_context(self, conv_id):
         if conv_id not in self.conversation_context:
@@ -54,7 +54,6 @@ class Engine:
         
     def preprocess_sentence(self, sentence):
         tokens = nlp.tokenize_text(sentence)
-        print tokens
         ret = ""
         for token in tokens:
             ret += self.preprocess_token(token) + " "
@@ -63,11 +62,12 @@ class Engine:
         
 
     # Process message focuses on the question or intent of the message above all else. For sentences that don't express intent, it collects entities. If it doesn't find an intent but finds entities it will make it's best guess at an intent, and corresponding response
-    
-    def process_message(self, conv_id, message):
+    def process_message(self, conv_id, message, clear_context=True):
         
         self.initialize_context(conv_id)
         sentences = nlp.get_sentences(message)
+        watson_response = self.watson.json_response(conv_id, self.preprocess_sentence(message))
+        self.extract_entities(conv_id, watson_response)
         for sentence in sentences:
             clean_sentence = self.preprocess_sentence(sentence)
             watson_response = self.watson.json_response(conv_id, clean_sentence)
@@ -85,15 +85,16 @@ class Engine:
         # If we haven't yet found an intent using watson,
         # we can guess using the extracted entities.
         context = self.conversation_context[conv_id]            
-        if not context['intent']:
-            context['intent'] = self.guess_intent(conv_id)
-            context['response'] = \
-                                  self.response_builder.get_best_response(
-                                      context['intent'],
-                                      context['entities'])
+        # if not context['intent']:
+        #     context['intent'] = self.guess_intent(conv_id)
+        #     context['response'] = \
+        #                           self.response_builder.get_best_response(
+        #                               context['intent'],
+        #                               context['entities'])
 
         ret = copy.deepcopy(context)
-        self.clear_context(conv_id)
+        if clear_context:
+            self.clear_context(conv_id)
         return ret
                 
             
