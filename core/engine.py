@@ -112,6 +112,7 @@ class Engine:
                  # we can guess using the extracted entities. Only if self.guess is True
                 if guess and (not context['intent'] or not context['response']):
                     print "Guessing intent"
+                    print context
                     context['intent'] = self.guess_intent(conv_id)
                     context['response'] = self.response_builder.get_best_response(
                         context['intent'],
