@@ -24,6 +24,7 @@ class Engine:
             self.conversation_context[conv_id] = v
 
     def clear_context(self, conv_id):
+        print "Clearing context"
         self.conversation_context.pop(conv_id, None)
             
 
