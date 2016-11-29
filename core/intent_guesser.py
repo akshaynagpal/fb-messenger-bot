@@ -39,6 +39,7 @@ class IntentGuesser:
             entities = underscore_entities(line[3].split(','))
             key = self.build_key(entities)
             add_to_intent_dict(self.intent_dict, key, intent)
+        print "Read {} entries.".format(len(data))
 
     # Assumes intent exists
     def build_key(self, entities):
