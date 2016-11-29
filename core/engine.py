@@ -19,6 +19,7 @@ class Engine:
 
     def initialize_context(self, conv_id):
         if conv_id not in self.conversation_context:
+            print "Initializing context for {}".format(conv_id)
             v = {'entities':set(), 'intent':None, 'response':None}
             self.conversation_context[conv_id] = v
 
