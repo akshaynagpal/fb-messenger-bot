@@ -93,6 +93,7 @@ class Engine:
             print watson_response
             print sentence
             if nlp.sentence_is_question(sentence.strip()):
+                print "Processing question"
                 self.extract_entities(conv_id, watson_response)
                 self.extract_intent(conv_id,watson_response)
                 context = self.conversation_context[conv_id]
