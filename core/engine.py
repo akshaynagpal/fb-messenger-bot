@@ -80,10 +80,12 @@ class Engine:
         full_watson_response = self.watson.json_response(conv_id, self.preprocess_sentence(message))
         # self.extract_entities(conv_id, watson_response)
         for sentence in sentences:
+            sentence = sentence.strip()
             clean_sentence = self.preprocess_sentence(sentence)
             watson_response = self.watson.json_response(conv_id, clean_sentence)
             print watson_response
-            if nlp.sentence_is_question(sentence):
+            print sentence
+            if nlp.sentence_is_question(sentence.strip()):
                 self.extract_entities(conv_id, watson_response)
                 self.extract_intent(conv_id,watson_response)
                 context = self.conversation_context[conv_id]
@@ -101,7 +103,9 @@ class Engine:
 
         # If we haven't yet found an intent using watson,
         # we can guess using the extracted entities. Only if self.guess is True
-        context = self.conversation_context[conv_id]            
+        self.extract_entities(conv_id, full_watson_response)
+        context = self.conversation_context[conv_id]
+        
         if self.guess and not context['intent']:
             context['intent'] = self.guess_intent(conv_id)
             context['response'] = \
@@ -131,7 +135,7 @@ def prompt(engine):
     while True:
         print "Your message:",
         message = stdin.readline()
-        result = engine.process_message(i, message)
+        result = engine.process_message(0, message, False)
         i += 1
         print result
         
