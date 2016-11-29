@@ -66,8 +66,11 @@ class Engine:
             
         
 
-    # Process message focuses on the question or intent of the message above all else. For sentences that don't express intent, it collects entities. If it doesn't find an intent but finds entities it will make it's best guess at an intent, and corresponding response
-    def process_message(self, conv_id, message, clear_context=True):
+    # Process message focuses on the question or intent of the message above all else. For sentences that don't express intent, it collects entities. If it doesn't find an intent but finds entities it will make it's best guess at an intent, and corresponding response. Message is self_contained if it's in an email or feedback form. For instant message, self_contained should be false. 
+    def process_message(self,
+                        conv_id, message,
+                        clear_context=True,
+                        self_contained=False):
         # This is to manage interactions like "hi!" or "hello", etc.
         basic_response = self.basic_responder.check_and_respond(message)
         if basic_response:
@@ -108,12 +111,13 @@ class Engine:
 
 
         # Try using the full message to build the response
-        context = self.conversation_context[conv_id]
-        self.extract_entities(conv_id, full_watson_response)
-        self.extract_intent(conv_id,full_watson_response)
-        context['response'] = self.response_builder.get_best_response(
-            context['intent'],
-            context['entities'])
+        if (self_contained):
+            context = self.conversation_context[conv_id]
+            self.extract_entities(conv_id, full_watson_response)
+            self.extract_intent(conv_id,full_watson_response)
+            context['response'] = self.response_builder.get_best_response(
+                context['intent'],
+                context['entities'])
 
         # If we haven't yet found an intent using watson,
         # we can guess using the extracted entities. Only if self.guess is True

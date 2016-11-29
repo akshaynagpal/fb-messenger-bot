@@ -52,7 +52,9 @@ def displayQuestionForm():
     if request.method=='POST':
         question =  request.form['question']
         question_user = question
-        result = engine.process_message(1, question)
+        result = engine.process_message(1,
+                                        question,
+                                        self_contained=True)
         answer = result['response']
 #        intents,entities = watson.return_intent_entity('0', question)
         # print 'reply='+str(intents[0]['intent'])+str(entities)
