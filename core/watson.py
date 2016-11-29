@@ -22,10 +22,11 @@ class ConversationAPI:
     def json_response(self,
                       user_id,
                       message):
+        context=self.lookup(user_id)
         response = self.conversation.message(
             workspace_id=self.workspace_id,
             message_input={'text': message},
-            context=self.lookup(user_id)
+            context=context
         )
         self.context_map[user_id] = response['context']
         return response
@@ -89,15 +90,26 @@ def graduate_affairs_2_config():
     config['password'] = 'zwgLdqOlcfYi'
     config['version'] = '2016-09-20'
     return config
+
+def basic_intents_config():
+    config = {}
+    config['workspace_id'] = '318135c4-e2b5-4548-9c17-7ad73154bca8'
+    config['username'] = '351251b5-22a9-4f30-9d04-884aff0aae4a'
+    config['password'] = 'zwgLdqOlcfYi'
+    config['version'] = '2016-11-28'
+    return config
+
+
     
 
 if __name__ == '__main__':
     
     
-    watson = ConversationAPI(graduate_affairs_2_config())
+    watson = ConversationAPI(rohan_graduate_affairs_config())
     # print watson.message(1, "hi")
     # print watson.message(1, "deadline for phd compsci")
-    print watson.json_response(1, "I submitted uah applications (including International House) a while ago. I was wondering when the results will come out? ")
+    print watson.json_response(1, "thank you! I was wondering when the results will come out? ")
+    print watson.json_response(1, "yes when will results be out for transcripts? ")    
     print watson.json_response(1, "How to transfer my I20 from another school?") 
 
 

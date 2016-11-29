@@ -9,7 +9,7 @@ from core.engine import Engine
 
 watson = w.ConversationAPI(w.graduate_affairs_2_config())
 demo_watson = w.ConversationAPI(w.rohan_admissions_config())
-engine = Engine('training/question-answers-2016-11-27.tsv')
+engine = Engine('training/question-answers-2016-11-27.tsv', 'training/general-intents.csv')
 
 import requests
 import flask

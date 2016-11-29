@@ -35,6 +35,10 @@ def add_to_response_dict(d,key, response):
         if not foundExisting:
             d[key][response] = 1
 
+def build_error_response():
+    return "I'm sorry. We do not know how to answer your question at this point. Please email graduateaffairs@columbia.edu"
+            
+
 class ResponseBuilder:
     def __init__(self,
                  training_data_path):
@@ -50,8 +54,6 @@ class ResponseBuilder:
             key = self.build_key(intent, entities)
             add_to_response_dict(self.response_dict, key, response)
 
-    def build_error_response():
-        return "I'm sorry. We do not know how to answer your question at this point. Please email graduateaffairs@columbia.edu"
     
     # Assumes intent exists
     def build_key(self, intent, entities):
