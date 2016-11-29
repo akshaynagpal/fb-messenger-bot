@@ -43,9 +43,13 @@ class BasicResponder:
                          message):
         message = message.lower()
         intent = None
-        for k,v in self.intent_map.items():
-            if k in message or message in k:
-                intent = v
+        # Exact match
+        if message in self.intent_map:
+            intent = self.intent_map[message]
+        else: # Fuzzy match
+            for k,v in self.intent_map.items():
+                if k in message or message in k:
+                    intent = v
         if intent:
             if intent in self.response_map:
                 return (intent, self.response_map[intent])
@@ -76,6 +80,9 @@ class TestBasicResponder(unittest.TestCase):
     def test_produce_response(self):
         s = "Thanks!"
         self.assertEqual("No problem.", self.br.produce_response(s)[1])
+        s = "thanks"
+        self.assertEqual("No problem.", self.br.produce_response(s)[1])
+        
         
 
     
