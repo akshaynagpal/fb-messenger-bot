@@ -8,7 +8,7 @@
 `python app.py`
 
 ## Evaluating a dataset
-`python evaluation.py [question-answer-data.tsv] > experiment_results`
+`python evaluation.py [-h] traintsv generalintentscsv testtsv > experiment_results`
 
 
 
