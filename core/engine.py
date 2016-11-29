@@ -118,8 +118,9 @@ class Engine:
                         context['entities'])
 
 
+                ret = copy.deepcopy(context)
                 self.clear_context(conv_id)
-                return context
+                return ret
 
 
         # Try using the full message to build the response
