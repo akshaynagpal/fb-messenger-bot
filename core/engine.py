@@ -91,6 +91,11 @@ class Engine:
                 entities = list(context['entities'])
                 context['response'] = \
                                       self.response_builder.get_best_response(intent, entities)
+                if not context['response']:
+                    self.extract_entities(conv_id, full_watson_response)
+                    context['response'] = \
+                                          self.response_builder.get_best_response(intent, entities)
+
                 self.clear_context(conv_id)
                 return context
 

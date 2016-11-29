@@ -63,6 +63,8 @@ def displayQuestionForm():
             intent_watson = result['intent']
         if len(result['entities']):
             entity_watson = result['entities']
+        else:
+          entity_watson = []
     else:
         return render_template("feedbackForm.html")
             
