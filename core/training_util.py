@@ -103,6 +103,9 @@ def print_basic_intents(data, fname):
             query = line[0]
             try: 
                 sentences = sent_tokenize(query)
+                if len(sentences) == 1:
+                    writer.writerow([sentences[0], intent])
+                    continue
                 for sentence in sentences:
                     sentence = sentence.strip()
                     if nlp.sentence_is_question(sentence):
@@ -174,11 +177,11 @@ def main():
         print line
 
 
-    print_entities(pretty_good_entities, args.entitiescsv)
-    print_entities_score(pmi_scores,
-                         args.entitiescsv,
-                         4, # threshold on the conditional probability of entity
-                         .075) 
+    # print_entities(pretty_good_entities, args.entitiescsv)
+    # print_entities_score(pmi_scores,
+    #                      args.entitiescsv,
+    #                      4, # threshold on the conditional probability of entity
+    #                      .075) 
     
 
     # #get_non_questions(data)

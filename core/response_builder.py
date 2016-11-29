@@ -125,6 +125,10 @@ def main():
     entities = ['Registration', 'UAH', 'Uni']
     print resp.get_best_response(intent, entities)
 
+    entities = ['Department', 'Department_Orientation', 'Orientation', 'Registration']
+    intent = "Info"
+    print resp.get_best_response(intent, entities)
+
 
         
     
