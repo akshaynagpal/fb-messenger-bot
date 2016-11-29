@@ -48,7 +48,8 @@ class Engine:
         else:
             entities = [x['entity'] for x in response['entities']]
             intent_guess = self.intent_guesser.guess_intent(entities)
-            self.conversation_context[conv_id]['intent'] = intent_guess
+            if intent_guess:
+                self.conversation_context[conv_id]['intent'] = intent_guess
             
 
     def preprocess_token(self, token):
@@ -113,9 +114,9 @@ class Engine:
         # Try using the full message to build the response
         context = self.conversation_context[conv_id]
         self.extract_entities(conv_id, full_watson_response)
+        self.extract_intent(conv_id,full_watson_response)
         
         if (self_contained):
-            self.extract_intent(conv_id,full_watson_response)
             context['response'] = self.response_builder.get_best_response(
                 context['intent'],
                 context['entities'])
