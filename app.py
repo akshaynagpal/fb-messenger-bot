@@ -139,7 +139,8 @@ def received_message(messaging_event):
         result = engine.process_message(sender_id,
                                         message_text,
                                         clear_context=False)
-        if result['intent']:
+        print result
+        if result['intent'] and result['response']:
           reply = result['response']
         elif len(result['entities']) > 0:
           reply = "Gotcha. so how can I help?"
