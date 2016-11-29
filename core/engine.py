@@ -10,7 +10,7 @@ class Engine:
                  training_data_path,
                  basic_intents_csv,
                  guess = False,
-                 intent_confidence_thresh = .75):
+                 intent_confidence_thresh = .25):
         self.response_builder = ResponseBuilder(training_data_path)
         self.basic_responder = BasicResponder(basic_intents_csv)        
         self.intent_guesser = IntentGuesser(training_data_path)
