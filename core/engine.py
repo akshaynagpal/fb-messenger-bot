@@ -109,6 +109,7 @@ class Engine:
                  # If we haven't yet found an intent using watson,
                  # we can guess using the extracted entities. Only if self.guess is True
                 if guess and (not context['intent'] or not context['response']):
+                    print "Guessing intent"
                     context['intent'] = self.guess_intent(conv_id)
                     context['response'] = self.response_builder.get_best_response(
                         context['intent'],
