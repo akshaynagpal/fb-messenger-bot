@@ -136,7 +136,7 @@ def received_message(messaging_event):
     reply = "Sorry, cannot help you at this time!"
     if "text" in messaging_event["message"]:
         message_text = messaging_event["message"]["text"]
-        result = engine.message(sender_id, message_text, clear_context=False)
+        result = engine.process_message(sender_id, message_text, clear_context=False)
         if result['intent']:
           reply = result['response']
 

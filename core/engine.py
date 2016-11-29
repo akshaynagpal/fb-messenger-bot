@@ -66,13 +66,14 @@ class Engine:
         
         self.initialize_context(conv_id)
         sentences = nlp.get_sentences(message)
-        watson_response = self.watson.json_response(conv_id, self.preprocess_sentence(message))
-        self.extract_entities(conv_id, watson_response)
+        full_watson_response = self.watson.json_response(conv_id, self.preprocess_sentence(message))
+        # self.extract_entities(conv_id, watson_response)
         for sentence in sentences:
             clean_sentence = self.preprocess_sentence(sentence)
             watson_response = self.watson.json_response(conv_id, clean_sentence)
-            self.extract_entities(conv_id, watson_response)
+            print watson_response
             if nlp.sentence_is_question(sentence):
+                self.extract_entities(conv_id, watson_response)
                 self.extract_intent(conv_id,watson_response)
                 context = self.conversation_context[conv_id]
                 intent = context['intent']
