@@ -142,7 +142,8 @@ def received_message(messaging_event):
         message_text = messaging_event["message"]["text"]
         result = engine.process_message(sender_id,
                                         message_text,
-                                        clear_context=False)
+                                        clear_context=False,
+                                        guess=True)
         print result
         if result['intent'] and result['response']:
           reply = result['response']

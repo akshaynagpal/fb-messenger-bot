@@ -9,14 +9,12 @@ class Engine:
     def __init__(self,
                  training_data_path,
                  basic_intents_csv,
-                 guess = False,
                  intent_confidence_thresh = .25):
         self.response_builder = ResponseBuilder(training_data_path)
         self.basic_responder = BasicResponder(basic_intents_csv)        
         self.intent_guesser = IntentGuesser(training_data_path)
         self.intent_thresh = intent_confidence_thresh
         self.conversation_context = {}
-        self.guess = guess
         self.watson = watson.ConversationAPI(watson.rohan_graduate_affairs_config())
 
     def initialize_context(self, conv_id):
@@ -71,7 +69,9 @@ class Engine:
     def process_message(self,
                         conv_id, message,
                         clear_context=True,
-                        self_contained=False):
+                        self_contained=False,
+                        guess=False
+    ):
         # This is to manage interactions like "hi!" or "hello", etc.
         basic_response = self.basic_responder.check_and_respond(message)
         if basic_response:
@@ -106,6 +106,14 @@ class Engine:
                     entities = list(context['entities'])
                     context['response'] = \
                                           self.response_builder.get_best_response(intent, entities)
+                 # If we haven't yet found an intent using watson,
+                 # we can guess using the extracted entities. Only if self.guess is True
+                if guess and (not context['intent'] or not context['response']):
+                    context['intent'] = self.guess_intent(conv_id)
+                    context['response'] = self.response_builder.get_best_response(
+                        context['intent'],
+                        context['entities'])
+
 
                 self.clear_context(conv_id)
                 return context
@@ -123,7 +131,8 @@ class Engine:
 
         # If we haven't yet found an intent using watson,
         # we can guess using the extracted entities. Only if self.guess is True
-        if self.guess and not context['intent']:
+        if self_contained and guess and \
+           (not context['intent'] or not context['response']):
             context['intent'] = self.guess_intent(conv_id)
             context['response'] = \
                                   self.response_builder.get_best_response(
@@ -152,7 +161,10 @@ def prompt(engine):
     while True:
         print "Your message:",
         message = stdin.readline()
-        result = engine.process_message(0, message, False)
+        result = engine.process_message(0,
+                                        message,
+                                        clear_context=False,
+                                        guess=True)
         i += 1
         print result
         
