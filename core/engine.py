@@ -18,6 +18,7 @@ class Engine:
         self.watson = watson.ConversationAPI(watson.rohan_graduate_affairs_config())
 
     def initialize_context(self, conv_id):
+        print self.conversation_context
         if conv_id not in self.conversation_context:
             print "Initializing context for {}".format(conv_id)
             v = {'entities':set(), 'intent':None, 'response':None}
@@ -111,8 +112,6 @@ class Engine:
                  # If we haven't yet found an intent using watson,
                  # we can guess using the extracted entities. Only if self.guess is True
                 if guess and (not context['intent'] or not context['response']):
-                    print "Guessing intent"
-                    print context
                     context['intent'] = self.guess_intent(conv_id)
                     context['response'] = self.response_builder.get_best_response(
                         context['intent'],
