@@ -137,7 +137,7 @@ def received_message(messaging_event):
     
     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
-    reply = "Sorry, cannot help you at this time! Please reach out to SEAS_GSA@columbia.edu"
+    reply = "Sorry, We cannot help you at this time! Please email SEAS_GSA@columbia.edu for further inquiries."
     if "text" in messaging_event["message"]:
         message_text = messaging_event["message"]["text"]
         result = engine.process_message(sender_id,
@@ -148,7 +148,12 @@ def received_message(messaging_event):
         if result['intent'] and result['response']:
           reply = result['response']
         elif len(result['entities']) > 0:
-          reply = "Gotcha. so how can I help?"
+          if result['intent']:
+            reply = "I think you're asking about {} of ({}). What's your question?".format(
+              result[intent],
+              result['entities'])
+          else:
+            reply = "Gotcha. So how can I help?"
           
 
     send_message(sender_id, reply)

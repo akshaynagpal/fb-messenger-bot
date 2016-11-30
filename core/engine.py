@@ -85,6 +85,7 @@ class Engine:
         self.initialize_context(conv_id)
         sentences = nlp.get_sentences(message)
         full_watson_response = self.watson.json_response(conv_id, self.preprocess_sentence(message))
+        print "Full watson response {}".format(full_watson_response)
         # self.extract_entities(conv_id, watson_response)
         for sentence in sentences:
             sentence = sentence.strip()
