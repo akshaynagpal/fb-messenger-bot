@@ -148,11 +148,6 @@ def received_message(messaging_event):
         if result['intent'] and result['response']:
           reply = result['response']
         elif len(result['entities']) > 0:
-          if result['intent']:
-            reply = "I think you're asking about {} of ({}). What's your question?".format(
-              result['intent'],
-              result['entities'])
-          else:
             reply = "Gotcha. So how can I help?"
           
 
