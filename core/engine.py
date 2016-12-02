@@ -62,7 +62,6 @@ class Engine:
     def preprocess_sentence(self, sentence):
         tokens = nlp.tokenize_text(sentence)
         ret = ""
-        print tokens
         for token in tokens:
             ret += self.preprocess_token(token) + " "
         return ret.strip()
@@ -86,7 +85,8 @@ class Engine:
         self.initialize_context(conv_id)
         sentences = nlp.get_sentences(message)
         print message
-        full_watson_response = self.watson.json_response(conv_id, message)
+        print type(message)
+        full_watson_response = self.watson.json_response(conv_id, preprocess_sentence(message))
         print "Full watson response {}".format(full_watson_response)
         # self.extract_entities(conv_id, watson_response)
         for sentence in sentences:

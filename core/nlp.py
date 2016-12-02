@@ -41,18 +41,14 @@ def add_to_normalized_word_map(key, value):
 
 
 def tokenize_text(text):
-    sentence_re = r'''(?x)      # set flag to allow verbose regexps
-      ([A-Z])(\.[A-Z])+\.?  # abbreviations, e.g. U.S.A.
-    | \w+([-']\w+)*            # words with optional internal hyphens
-    | \$?\d+(\.\d+)?%?      # currency and percentages, e.g. $12.40, 82%
-    | \.\.\.                # ellipsis
-    | [][.,;"'?():-_`]      # these are separate tokens
-    '''
-
-    try:
-        return nltk.regexp_tokenize(text, sentence_re)
-    except:
-        return nltk.word_tokenize(text)
+    # sentence_re = r'''(?x)      # set flag to allow verbose regexps
+    #   ([A-Z])(\.[A-Z])+\.?  # abbreviations, e.g. U.S.A.
+    # | \w+([-']\w+)*            # words with optional internal hyphens
+    # | \$?\d+(\.\d+)?%?      # currency and percentages, e.g. $12.40, 82%
+    # | \.\.\.                # ellipsis
+    # | [][.,;"'?():-_`]      # these are separate tokens
+    # '''
+    return nltk.word_tokenize(text)
 
 # assumes sentence is stripped of trailing white space 
 def sentence_is_question(sentence):
