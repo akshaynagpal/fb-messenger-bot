@@ -51,7 +51,7 @@ def displayQuestionForm():
     global question, entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response, answer
     if request.method=='POST':
         question =  request.form['question']
-        question_user = question
+        question = question.replace('\n', ' ').replace('\r', '')
         result = engine.process_message(1,
                                         question,
                                         self_contained=True)
@@ -123,13 +123,42 @@ def webhook():
 
     return "ok", 200
 
+def build_chat_reply(result):
+    reply = "Sorry, We cannot help you at this time! Please email SEAS_GSA@columbia.edu for further inquiries."  
+    if result['intent'] and result['response']:
+      reply = result['response']
+    elif len(result['entities']) > 0:
+      reply = "Gotcha. So how can I help?"
+    return reply 
+
+def build_email_reply(result):
+  
+  reply = "Sorry, We cannot help you at this time! Please email SEAS_GSA@columbia.edu for further inquiries."  
+  if result['intent'] and result['response']:
+    reply = result['response']
+  return reply
+
+  
+
 @app.route('/test_microsoft', methods=['POST', 'GET'])
 def basic_message():
     data = request.get_json()
     log(data)
+    source = data['source']
+    self_contained = True if source == "email" else False
     conv_id = data['address']['conversation']['id']
     message = data['text']
-    response = demo_watson.json_response(conv_id, message)
+    message_text = message.replace('\n', ' ').replace('\r', '')
+    result = engine.process_message(conv_id,
+                                    message_text,
+                                    clear_context=self_contained,
+                                    self_contained=self_contained)
+    response = {}
+    response['result'] = result
+
+    reply = build_email_reply(result) if self_contained else build_chat_reply(result)
+   
+    response['output'] = {'text':reply}
     log(response)
     return flask.jsonify(response)
 
@@ -145,11 +174,7 @@ def received_message(messaging_event):
                                         clear_context=False,
                                         guess=True)
         print result
-        if result['intent'] and result['response']:
-          reply = result['response']
-        elif len(result['entities']) > 0:
-            reply = "Gotcha. So how can I help?"
-          
+        reply = build_chat_reply(result)
 
     send_message(sender_id, reply)
 

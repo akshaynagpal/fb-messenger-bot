@@ -90,6 +90,7 @@ class Engine:
         for sentence in sentences:
             sentence = sentence.strip()
             clean_sentence = self.preprocess_sentence(sentence)
+            clean_sentence += "?"
             watson_response = self.watson.json_response(conv_id, clean_sentence)
             print watson_response
             print sentence
