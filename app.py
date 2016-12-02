@@ -154,7 +154,6 @@ def basic_message():
                                     clear_context=self_contained,
                                     self_contained=self_contained)
     response = {}
-    response['result'] = result
 
     reply = build_email_reply(result) if self_contained else build_chat_reply(result)
    
