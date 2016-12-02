@@ -157,7 +157,7 @@ def basic_message():
 
     reply = build_email_reply(result) if self_contained else build_chat_reply(result)
    
-    response['output'] = {'text':reply}
+    response['output'] = {'text':[reply]}
     log(response)
     return flask.jsonify(response)
 
