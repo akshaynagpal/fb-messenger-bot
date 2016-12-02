@@ -43,12 +43,16 @@ def add_to_normalized_word_map(key, value):
 def tokenize_text(text):
     sentence_re = r'''(?x)      # set flag to allow verbose regexps
       ([A-Z])(\.[A-Z])+\.?  # abbreviations, e.g. U.S.A.
-    | \w+(-\w+)*            # words with optional internal hyphens
+    | \w+([-']\w+)*            # words with optional internal hyphens
     | \$?\d+(\.\d+)?%?      # currency and percentages, e.g. $12.40, 82%
     | \.\.\.                # ellipsis
     | [][.,;"'?():-_`]      # these are separate tokens
     '''
-    return nltk.word_tokenize(text)
+
+    try:
+        return nltk.regexp_tokenize(text, sentence_re)
+    except:
+        return nltk.word_tokenize(text)
 
 # assumes sentence is stripped of trailing white space 
 def sentence_is_question(sentence):
@@ -151,8 +155,14 @@ class TestEntityExtraction(unittest.TestCase):
         toks = tokenize_text(s)
         self.assertEqual(10, len(toks))
         self.assertEqual("I-20",toks[7])
-        self.assertEqual("DS-2019",toks[8])        
+        self.assertEqual("DS-2019",toks[8])
 
+        s = "I was wondering when I'll be notified"
+        toks = tokenize_text(s)
+        self.assertEqual(7, len(toks))
+        self.assertEqual("I'll",toks[4])
+
+        
     def test_nounphrase(self):
         s = "I have some issues about my I20 and the orientation attendance"
         nps = get_nounphrases(s, False) #Don't normalize words
