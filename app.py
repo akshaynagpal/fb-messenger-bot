@@ -6,6 +6,7 @@ import psycopg2
 import csv
 import urlparse
 from core.engine import Engine
+from autocorrect import spell
 
 watson = w.ConversationAPI(w.graduate_affairs_2_config())
 demo_watson = w.ConversationAPI(w.rohan_admissions_config())
@@ -204,6 +205,11 @@ def log(message):  # simple wrapper for logging to stdout on heroku
     print str(message)
     sys.stdout.flush()
 
+def correct_sentence(sentence):
+    words = sentence.split()
+    for word in words:
+        word = spell(word)
+    return " ".join(words)
 
 if __name__ == '__main__':
     app.run(debug=True) 
