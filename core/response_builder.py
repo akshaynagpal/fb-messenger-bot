@@ -50,7 +50,9 @@ class ResponseBuilder:
             if not response.strip():
                 continue
             intent = line[2]
-            entities = underscore_entities(line[3].split(','))
+            entities = []
+            if line[3].strip():
+                entities = underscore_entities(line[3].split(','))
             key = self.build_key(intent, entities)
             add_to_response_dict(self.response_dict, key, response)
 
@@ -65,7 +67,7 @@ class ResponseBuilder:
         cache = set()
         potential_responses = {}
         def helper(intent, entities):
-            if len(entities) == 0 or intent is None:
+            if intent is None:
                 return None
             key = self.build_key(intent, entities)
             if key in cache:
@@ -88,6 +90,8 @@ class ResponseBuilder:
                 new_entities = [ent for ent in entities if ent != entity]
                 # Recurse with one less entity
                 helper(intent, new_entities)
+
+
         helper(intent_, entities_)
         if len(potential_responses) == 0:
             return None
@@ -102,7 +106,7 @@ class ResponseBuilder:
         # sort by freq and then by dimension
         response_list.sort(key=lambda x: x[1], reverse=True)
         response_list.sort(key=lambda x: x[2], reverse=True)
-        print response_list
+        # print response_list#
         return response_list[0][0]
         
         
@@ -128,6 +132,11 @@ def main():
     entities = ['Department', 'Department_Orientation', 'Orientation', 'Registration']
     intent = "Info"
     print resp.get_best_response(intent, entities)
+
+    entities = []
+    intent = "Withdrawal"
+    print resp.get_best_response(intent, entities)
+
 
 
         
