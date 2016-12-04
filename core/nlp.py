@@ -5,7 +5,7 @@ import re, string
 from dateutil.parser import parse
 
 # consts
-question_key_phrases = ["when", "how", "where", "what", "wondering", "could you", "can you"]
+question_key_phrases = ["when", "who", "how", "where", "what", "wondering", "could you", "can you"]
 
 # Global
 normalized_word_map = {}
