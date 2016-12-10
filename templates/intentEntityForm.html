@@ -39,6 +39,11 @@
       <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 	  <form action="feedbackSubmit" method = POST>
+	  	<input type="hidden" id="question_user" name="question_user" value="{{ question }}">
+	  	<input type="hidden" id="solr_response" name="solr_response" value="{{ link }}">
+	  	<input type="hidden" id="watson_intent" name="watson_intent" value="{{ intent }}">
+	  	<input type="hidden" id="watson_entity" name="watson_entity" value="{{ entities[0] }}">
+	  	<input type="hidden" id="engine_response" name="engine_response" value="{{ response }}">	  	
 	    Which Response was the best for the question asked according to you?<br>
 	    <select id="selectBestResponse" name="selectBestResponse">
 	      <option value="0">Please select</option>

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 import json
@@ -28,14 +30,6 @@ def create_app():
 app = create_app()
 
 
-question_user = None
-intent_user = None
-intent_watson = None
-entity_user = None
-entity_watson = None
-solr_response = None
-
-
 @app.route('/', methods=['GET'])
 def verify():
     # when the endpoint is registered as a webhook, it must echo back
@@ -49,7 +43,6 @@ def verify():
 
 @app.route('/feedback', methods=['GET','POST'])
 def displayQuestionForm():
-    global question, entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response, answer
     if request.method=='POST':
         question =  request.form['question']
         question_user = question
@@ -70,7 +63,7 @@ def displayQuestionForm():
     return render_template("intentEntityForm.html",
                            question = question,
                            intent=intent_watson,
-                           entities=entity_watson,
+                           entities=list(entity_watson),
                            link=solr_response,
                            response=answer)
 
@@ -88,8 +81,19 @@ def feedbackSubmit():
     cur = conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS responses(question_user TEXT, entity_watson TEXT, intent_watson TEXT, solr_response TEXT, bestResponse TEXT);")
     conn.commit();
-    global entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response, answer
     bestResponse = request.form['selectBestResponse']
+    question_user = request.form['question_user']
+    entity_watson = request.form['watson_entity']
+    intent_watson = request.form['watson_intent']
+    solr_response = request.form['solr_response']
+    answer = request.form['engine_response']
+    print 'DATA to be inserted to SQL:'
+    print 'question user:'+question_user
+    print 'best response:'+bestResponse
+    print 'entity_watson'+entity_watson
+    print 'intent_watson'+intent_watson
+    print 'solr_response'+solr_response
+    print 'END.'
 
     log(str(entity_watson)+" "+str(intent_watson)+" "+str(solr_response)+" "+str(bestResponse)+" "+str(question_user))
 
