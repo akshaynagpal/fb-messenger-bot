@@ -58,7 +58,7 @@ def displayQuestionForm():
         answer = result['response']
 #        intents,entities = watson.return_intent_entity('0', question)
         # print 'reply='+str(intents[0]['intent'])+str(entities)
-        solr_response = ''.join(solr.query(question)[0]['title'])
+        solr_response = ''.join(solr.query(question, ['title'])[0]['title'])
         print result['entities']
 
         if result['intent']:
