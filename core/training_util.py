@@ -4,7 +4,7 @@ import nltk
 import math
 import nlp
 from word2vec import EmbeddingHelper
-
+from fuzzywuzzy import process
 
 
 # Load Google's pre-trained Word2Vec model.

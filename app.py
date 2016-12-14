@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 import json
@@ -6,10 +8,11 @@ import psycopg2
 import csv
 import urlparse
 from core.engine import Engine
+from autocorrect import spell
 
 watson = w.ConversationAPI(w.graduate_affairs_2_config())
 demo_watson = w.ConversationAPI(w.rohan_admissions_config())
-engine = Engine('training/question-answers-2016-11-10.tsv')
+engine = Engine('training/question-answers-2016-11-27.tsv', 'training/general-intents.csv')
 
 import requests
 import flask
@@ -27,14 +30,6 @@ def create_app():
 app = create_app()
 
 
-question_user = None
-intent_user = None
-intent_watson = None
-entity_user = None
-entity_watson = None
-solr_response = None
-
-
 @app.route('/', methods=['GET'])
 def verify():
     # when the endpoint is registered as a webhook, it must echo back
@@ -48,27 +43,27 @@ def verify():
 
 @app.route('/feedback', methods=['GET','POST'])
 def displayQuestionForm():
-    global question, entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response, answer
     if request.method=='POST':
         question =  request.form['question']
         question_user = question
         result = engine.process_message(1, question)
         answer = result['response']
-        intents,entities = watson.return_intent_entity('0', question)
+#        intents,entities = watson.return_intent_entity('0', question)
         # print 'reply='+str(intents[0]['intent'])+str(entities)
         solr_response = ''.join(solr.query(question)[0]['title'])
+        print result['entities']
 
-        if(len(intents)>0):
+        if result['intent']:
             intent_watson = result['intent']
-        if(len(entities)>0):
-            entity_watson = entities[0]['entity']
+        if len(result['entities']):
+            entity_watson = result['entities']
     else:
         return render_template("feedbackForm.html")
             
     return render_template("intentEntityForm.html",
                            question = question,
-                           intent=intents[0]['intent'],
-                           entity=entity_watson,
+                           intent=intent_watson,
+                           entities=list(entity_watson),
                            link=solr_response,
                            response=answer)
 
@@ -86,8 +81,19 @@ def feedbackSubmit():
     cur = conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS responses(question_user TEXT, entity_watson TEXT, intent_watson TEXT, solr_response TEXT, bestResponse TEXT);")
     conn.commit();
-    global entity_watson,intent_watson,question_user,entity_user,intent_user,solr_response, answer
     bestResponse = request.form['selectBestResponse']
+    question_user = request.form['question_user']
+    entity_watson = request.form['watson_entity']
+    intent_watson = request.form['watson_intent']
+    solr_response = request.form['solr_response']
+    answer = request.form['engine_response']
+    print 'DATA to be inserted to SQL:'
+    print 'question user:'+question_user
+    print 'best response:'+bestResponse
+    print 'entity_watson'+entity_watson
+    print 'intent_watson'+intent_watson
+    print 'solr_response'+solr_response
+    print 'END.'
 
     log(str(entity_watson)+" "+str(intent_watson)+" "+str(solr_response)+" "+str(bestResponse)+" "+str(question_user))
 
@@ -135,7 +141,9 @@ def received_message(messaging_event):
     reply = "Sorry, cannot help you at this time!"
     if "text" in messaging_event["message"]:
         message_text = messaging_event["message"]["text"]
-        reply = watson.message(sender_id, message_text)
+        result = engine.process_message(sender_id, message_text, clear_context=False)
+        if result['intent']:
+          reply = result['response']
 
     send_message(sender_id, reply)
 
@@ -201,6 +209,11 @@ def log(message):  # simple wrapper for logging to stdout on heroku
     print str(message)
     sys.stdout.flush()
 
+def correct_sentence(sentence):
+    words = sentence.split()
+    for word in words:
+        word = spell(word)
+    return " ".join(words)
 
 if __name__ == '__main__':
     app.run(debug=True) 

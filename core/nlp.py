@@ -2,6 +2,7 @@ import nltk
 nltk.data.path.append('./nltk_data/')
 from nltk.tokenize import sent_tokenize, word_tokenize
 import re, string
+from dateutil.parser import parse
 
 # consts
 question_key_phrases = ["when", "how", "where", "what", "wondering", "could you"]
@@ -10,6 +11,13 @@ question_key_phrases = ["when", "how", "where", "what", "wondering", "could you"
 normalized_word_map = {}
 
 pattern = re.compile('[\W_]+')
+
+def is_date(string):
+    try: 
+        parse(string)
+        return True
+    except ValueError:
+        return False
 
 # Return sentences for some text
 def get_sentences(text):
@@ -74,7 +82,11 @@ def get_nounphrases(text, should_normalize=True):
     chunker = nltk.RegexpParser(grammar)
     
     toks = tokenize_text(text)
-    postoks = nltk.tag.pos_tag(toks)
+    postoks = []
+    try:
+        postoks = nltk.tag.pos_tag(toks)
+    except:
+        return []
     
     
     tree = chunker.parse(postoks)
