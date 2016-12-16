@@ -154,6 +154,8 @@ def basic_message():
     conv_id = data['address']['conversation']['id']
     message = data['text']
     message_text = message.replace('\n', ' ').replace('\r', '')
+
+    solr_response = ''.join(solr.query(message_text, ['title'])[0]['title']).strip()
     result = engine.process_message(conv_id,
                                     message_text,
                                     clear_context=self_contained,
@@ -161,6 +163,8 @@ def basic_message():
     response = {}
 
     reply = build_email_reply(result) if self_contained else build_chat_reply(result)
+    if solr_response:
+      reply += "We found this link for you: " + solr_response
    
     response['output'] = {'text':[reply]}
     log(response)
